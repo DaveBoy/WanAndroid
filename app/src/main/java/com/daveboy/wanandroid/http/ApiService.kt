@@ -8,10 +8,7 @@ import retrofit2.http.POST
 import retrofit2.http.QueryName
 
 interface ApiService {
-    companion object{
-        const val BASE_URL="https://www.wanandroid.com"
-    }
     @FormUrlEncoded
-    @POST("/user/login")
-    fun login(@Field("username")username:String, @Field("password")password:String): Deferred<WanResponse<LoginUser>>
+    @POST(Urls.LOGIN)
+    suspend fun login(@Field("username")username:String, @Field("password")password:String): WanResponse<LoginUser>
 }

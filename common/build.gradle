@@ -1,0 +1,53 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: "kotlin-kapt"
+
+android {
+    compileSdkVersion AppConfig.compileSdkVersion
+    buildToolsVersion AppConfig.buildToolsVersion
+
+
+    defaultConfig {
+
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api Ext.kotlin
+    api Ext.appcompat
+    api Ext.ktx
+    api Ext.anko
+
+    // Kotlin coroutines
+    api Ext.coroutines
+
+    api Ext.material
+    api Ext.constraintlayout
+    api Ext.lifecycle
+    api Ext.viewmodelKtx
+    //http
+    api Ext.retrofit
+    api Ext.converterGson
+    api Ext.okhttp3Log
+
+    //util
+    api Ext.util
+
+    //test
+    testImplementation Ext.junit
+    androidTestImplementation Ext.extUnit
+    androidTestImplementation Ext.espresso
+}

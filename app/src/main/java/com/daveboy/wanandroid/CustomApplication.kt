@@ -1,7 +1,7 @@
 package com.daveboy.wanandroid
 
 import android.app.Application
-import com.tencent.mmkv.MMKV
+import okhttp3.internal.Internal.instance
 import kotlin.properties.Delegates
 
 class CustomApplication:Application() {
@@ -9,8 +9,16 @@ class CustomApplication:Application() {
     override fun onCreate() {
         super.onCreate()
         instance=this
-        MMKV.initialize(this)
+        initUtil()
     }
+
+    /**
+     * 初始化工具类
+     */
+    private fun initUtil() {
+
+    }
+
     companion object{
         var instance:Application by Delegates.notNull()
     }
