@@ -59,6 +59,7 @@ object Ext {
     const val objectboxKotlin = "io.objectbox:objectbox-kotlin:${Version.objectboxVersion}"
     const val objectboxAndroid = "io.objectbox:objectbox-android:${Version.objectboxVersion}"
     const val objectboxGradlePlugin = "io.objectbox:objectbox-gradle-plugin:${Version.objectboxVersion}"
+    const val objectboxBrowser = "io.objectbox:objectbox-android-objectbrowser:${Version.objectboxVersion}"
 
     //util
     const val util = "com.blankj:utilcodex:${Version.utilcodeVersion}"

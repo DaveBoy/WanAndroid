@@ -1,7 +1,8 @@
 package com.daveboy.wanandroid
 
 import android.app.Application
-import okhttp3.internal.Internal.instance
+import com.blankj.utilcode.util.LogUtils
+import com.daveboy.wanandroid.database.BoxManager
 import kotlin.properties.Delegates
 
 class CustomApplication:Application() {
@@ -10,6 +11,11 @@ class CustomApplication:Application() {
         super.onCreate()
         instance=this
         initUtil()
+        initDataBase()
+    }
+
+    private fun initDataBase() {
+        BoxManager.init(this)
     }
 
     /**

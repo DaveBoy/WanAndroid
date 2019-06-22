@@ -1,5 +1,9 @@
 package com.daveboy.wanandroid.http
 
+import com.blankj.utilcode.util.LogUtils
+import com.daveboy.common.SP_COOKIE
+import com.daveboy.common.Util.getString
+import com.daveboy.common.Util.put
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -22,16 +26,19 @@ object RetrofitManager {
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level=HttpLoggingInterceptor.Level.BODY
             })
-            /* .addInterceptor {
-                 if(getString(SP_COOKIE)==null) {
-                     //获取
-                     val headers = it.proceed(it.request()).headers("Set-Cookie")
-                     LogUtils.v ("Get-Cookie:$headers")
-                     put(SP_COOKIE,headers.toString())
+             .addInterceptor {
+                 LogUtils.i("请求地址：${it.request().url()}")
+                val requestUrl=it.request().url().toString()
+                 if(!requestUrl.contains(Urls.LOGIN)){
+                    it.proceed(it.request().newBuilder().addHeader("Cookie", getString(SP_COOKIE)?:"").build())
+                 }else{
+                     val response = it.proceed(it.request().newBuilder().build())
+                     val cookie=response.headers("set-cookie")
+                     put(SP_COOKIE,cookie.toString())
+                     LogUtils.i("cookie:$cookie")
+                     response
                  }
-                 //设置
-                 it.proceed(it.request().newBuilder().addHeader("Cookie", kv.decodeString(COOKIE_KEY)).build())
-             }*/
+             }
             .build()
     }
 }

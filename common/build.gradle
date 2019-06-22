@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: "kotlin-kapt"
+
 
 android {
     compileSdkVersion AppConfig.compileSdkVersion
@@ -23,7 +23,12 @@ android {
     }
 
 }
-
+//此依赖主要用于browser，可以在浏览器中查看app的数据
+dependencies {
+    debugApi Ext.objectboxBrowser
+    releaseApi Ext.objectboxAndroid
+}
+apply plugin: 'io.objectbox' // apply last
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api Ext.kotlin
@@ -50,4 +55,12 @@ dependencies {
     testImplementation Ext.junit
     androidTestImplementation Ext.extUnit
     androidTestImplementation Ext.espresso
+
+
+    //objectBox
+   // api Ext.objectboxAndroid
+    api Ext.objectboxKotlin
+
+
 }
+

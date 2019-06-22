@@ -22,10 +22,7 @@ class LoginActivity : AppCompatActivity() {
     private fun initViewModel() {
         loginViewModel= ViewModelProviders.of(this).get(LoginViewModel::class.java)
         loginViewModel.loginUser.observe(this, Observer {
-            /**
-             * 登录成功后
-             */
-            Log.i("login","login sucess")
+
         })
         login.setOnClickListener {
             loginViewModel.login(username.text.toString(),password.text.toString())
