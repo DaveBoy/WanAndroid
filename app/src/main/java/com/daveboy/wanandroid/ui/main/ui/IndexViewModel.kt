@@ -13,10 +13,7 @@ class IndexViewModel: BaseViewModel() {
     private val repository= IndexRepository()
     val errorMsg=MutableLiveData<String>()
 
-    fun getArticleList(isFresh:Boolean=false){
-        if(isFresh){
-            page.value=0
-        }
+    fun getArticleList(){
         viewModelScope.launch {
             runCatching {
                 repository.getArticleList(page.value?:0)
@@ -24,7 +21,7 @@ class IndexViewModel: BaseViewModel() {
                 if(it.errorCode!=0){
                     errorMsg.value=it.errorMsg
                 }else {
-                    page.value=page.value?:0+1
+                    page.value=(page.value?:0)+1
                     LogUtils.i(it.data)
                     articleList.value=it.data
                     repository.insertArticleResponse(it.data)

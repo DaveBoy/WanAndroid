@@ -28,6 +28,8 @@ object Version {
     const val utilcodeVersion="1.24.4"
     const val fragmentationVersion="1.0.1"
     const val baseAdapterVersion="2.9.45-androidx"
+    const val superTextVersion="2.2.4"
+    const val smartVersion="1.1.0-andx-11"
 }
 
 object Ext {
@@ -71,6 +73,8 @@ object Ext {
 
     //baseAdapter
     const val baseAdapter ="com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.baseAdapterVersion}"
+    const val superText ="com.github.lygttpod:SuperTextView:${Version.superTextVersion}"
+    const val smartRefresh ="com.scwang.smartrefresh:SmartRefreshLayout:${Version.smartVersion}"
 
 
 }

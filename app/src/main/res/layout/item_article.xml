@@ -16,6 +16,8 @@
         android:drawableStart="@mipmap/home_hot"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:textSize="@dimen/text_mini_12"
+        android:drawablePadding="5dp"
         tools:text="作者名"
         />
     <TextView
@@ -25,6 +27,7 @@
         app:layout_constraintStart_toEndOf="@id/item_author"
         app:layout_constraintTop_toTopOf="@id/item_author"
         android:layout_marginStart="@dimen/dp_20"
+        android:textSize="@dimen/text_mini_12"
         tools:text="标签"
         />
     <TextView
@@ -33,7 +36,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="@id/item_author"
         app:layout_constraintTop_toBottomOf="@id/item_author"
-        android:textSize="20sp"
+        android:textSize="18sp"
         android:textColor="#000"
         android:layout_marginTop="@dimen/dp_10"
         tools:text="标题"
@@ -46,6 +49,8 @@
         app:layout_constraintStart_toStartOf="@id/item_author"
         app:layout_constraintTop_toBottomOf="@id/item_title"
         android:layout_marginTop="@dimen/dp_10"
+        android:drawablePadding="5dp"
+        android:textSize="@dimen/text_mini_12"
         tools:text="5小时前"
         />
     <ImageView

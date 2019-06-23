@@ -64,6 +64,8 @@ dependencies {
     api Ext.fragmentation
     //baseAdapter
     api Ext.baseAdapter
+    //smartRefresh
+    api Ext.smartRefresh
 
 
 }

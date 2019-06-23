@@ -4,6 +4,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.wanandroid.R
+import com.scwang.smartrefresh.layout.api.RefreshLayout
+import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_index.*
 
 class IndexFragment :BaseVMFragment<IndexViewModel>(){
@@ -25,6 +27,17 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
     }
 
     override fun initListener() {
+        smart_ly.setOnRefreshLoadMoreListener(object:OnRefreshLoadMoreListener{
+            override fun onLoadMore(refreshLayout: RefreshLayout) {
+                initData()
+            }
+
+            override fun onRefresh(refreshLayout: RefreshLayout) {
+                viewModel.page.value=0
+                initData()
+            }
+
+        })
     }
 
     override fun initData() {
@@ -33,6 +46,9 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
     override fun createObserver() {
         viewModel.apply {
             articleList.observe(this@IndexFragment, Observer {
+                smart_ly.finishRefresh()
+                smart_ly.finishLoadMore()
+                smart_ly.setEnableLoadMore(it.over.not())
                 if(page.value==1){
                     adapter.setNewData(it.datas)
                 }else{
