@@ -60,6 +60,8 @@ dependencies {
     //objectBox
    // api Ext.objectboxAndroid
     api Ext.objectboxKotlin
+    //fragmentation
+    api Ext.fragmentation
 
 
 }

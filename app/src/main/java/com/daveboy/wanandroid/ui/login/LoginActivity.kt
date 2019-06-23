@@ -1,31 +1,41 @@
 package com.daveboy.wanandroid.ui.login
 
-import android.os.Bundle
-import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
+import com.blankj.utilcode.util.ToastUtils
+import com.daveboy.base.BaseVMActivity
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
-class LoginActivity : AppCompatActivity() {
+class LoginActivity : BaseVMActivity<LoginViewModel>() {
+    override fun getLayoutId()=R.layout.activity_login
+    override fun providerVMClass() = LoginViewModel::class.java
 
-    private lateinit var loginViewModel: LoginViewModel
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setContentView(R.layout.activity_login)
-        initViewModel()
+    override fun initView() {
     }
 
-    private fun initViewModel() {
-        loginViewModel= ViewModelProviders.of(this).get(LoginViewModel::class.java)
-        loginViewModel.loginUser.observe(this, Observer {
-
-        })
+    override fun initListener() {
         login.setOnClickListener {
-            loginViewModel.login(username.text.toString(),password.text.toString())
+            viewModel.login(username.text.toString(), password.text.toString())
         }
     }
+
+    override fun initData() {
+    }
+
+    override fun createObserver() {
+        viewModel.apply {
+            loginState.observe(this@LoginActivity, Observer {
+                startActivity(Intent().apply {
+                    setClass(this@LoginActivity, MainActivity::class.java)
+                    this@LoginActivity.finish()
+                })
+            })
+            errorMsg.observe(this@LoginActivity, Observer {
+                ToastUtils.showShort(it)
+            })
+        }
+    }
+
 }

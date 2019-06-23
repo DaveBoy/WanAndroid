@@ -26,6 +26,7 @@ object Version {
     const val materialVersion = "1.1.0-alpha07"
     const val objectboxVersion  = "2.3.4"
     const val utilcodeVersion="1.24.4"
+    const val fragmentationVersion="1.0.1"
 }
 
 object Ext {
@@ -63,5 +64,9 @@ object Ext {
 
     //util
     const val util = "com.blankj:utilcodex:${Version.utilcodeVersion}"
+
+    //fragment
+    const val fragmentation ="me.yokeyword:fragmentationx:${Version.fragmentationVersion}"
+
 
 }

@@ -1,30 +1,30 @@
 package com.daveboy.wanandroid.ui.main
 
-import android.os.Bundle
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import androidx.appcompat.app.AppCompatActivity
-import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.ui.main.ui.IndexFragment
+import kotlinx.android.synthetic.main.activity_main.*
+import me.yokeyword.fragmentation.SupportFragment
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
+    private  val fragments =  arrayOfNulls<SupportFragment>(4)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val navView: BottomNavigationView = findViewById(R.id.nav_view)
-
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+    override fun getLayoutId()= R.layout.activity_main
+    override fun initView() {
+        val fragment=findFragment(IndexFragment::class.java)
+        if(fragment==null){
+            fragments[0]=IndexFragment()
+            loadRootFragment(R.id.main_fraly, fragments[0]!!)
+        }else{
+            fragments[0]=fragment
+        }
     }
+
+    override fun initListener() {
+    }
+
+    override fun initData() {
+    }
+
+
 }

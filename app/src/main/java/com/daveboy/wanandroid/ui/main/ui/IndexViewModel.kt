@@ -1,29 +1,32 @@
-package com.daveboy.wanandroid.ui.login
+package com.daveboy.wanandroid.ui.main.ui
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.common.SP_COOKIE
-import com.daveboy.common.Util.getString
+import com.daveboy.wanandroid.database.ArticleResponse
 import kotlinx.coroutines.launch
 
-class LoginViewModel: BaseViewModel() {
-    val loginState=MutableLiveData(getString(SP_COOKIE).isNullOrBlank().not())
+class IndexViewModel: BaseViewModel() {
+    val page= MutableLiveData(0)
+    val articleList =MutableLiveData<ArticleResponse>()
+    private val repository= IndexRepository()
     val errorMsg=MutableLiveData<String>()
-    private val repository= LoginRepository()
 
-    fun login(username:String,password:String){
+    fun getArticleList(isFresh:Boolean=false){
+        if(isFresh){
+            page.value=0
+        }
         viewModelScope.launch {
             runCatching {
-                repository.login(username, password)
+                repository.getArticleList(page.value?:0)
             }.onSuccess {
                 if(it.errorCode!=0){
                     errorMsg.value=it.errorMsg
                 }else {
-                    repository.insertLoginUser(it.data)
-                    loginState.value=true
+                    page.value=page.value?:0+1
                     LogUtils.i(it.data)
+                    repository.insertArticleResponse(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()

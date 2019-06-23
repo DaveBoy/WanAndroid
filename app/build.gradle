@@ -12,7 +12,7 @@ android {
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.Test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,7 +20,12 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {//指定java版本
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
 }
+
 
 dependencies {
     api project(path: ':base')
