@@ -27,6 +27,7 @@ object Version {
     const val objectboxVersion  = "2.3.4"
     const val utilcodeVersion="1.24.4"
     const val fragmentationVersion="1.0.1"
+    const val baseAdapterVersion="2.9.45-androidx"
 }
 
 object Ext {
@@ -67,6 +68,9 @@ object Ext {
 
     //fragment
     const val fragmentation ="me.yokeyword:fragmentationx:${Version.fragmentationVersion}"
+
+    //baseAdapter
+    const val baseAdapter ="com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.baseAdapterVersion}"
 
 
 }

@@ -26,6 +26,7 @@ class IndexViewModel: BaseViewModel() {
                 }else {
                     page.value=page.value?:0+1
                     LogUtils.i(it.data)
+                    articleList.value=it.data
                     repository.insertArticleResponse(it.data)
                 }
             }.onFailure {

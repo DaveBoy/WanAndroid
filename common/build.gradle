@@ -62,6 +62,8 @@ dependencies {
     api Ext.objectboxKotlin
     //fragmentation
     api Ext.fragmentation
+    //baseAdapter
+    api Ext.baseAdapter
 
 
 }
