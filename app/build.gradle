@@ -38,4 +38,5 @@ dependencies {
     implementation 'androidx.navigation:navigation-ui-ktx:2.0.0'
     //objectBox
     kapt Ext.objectboxProcessor
+    kapt Ext.glideCompiler
 }

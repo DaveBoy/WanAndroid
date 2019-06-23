@@ -66,6 +66,10 @@ dependencies {
     api Ext.baseAdapter
     //smartRefresh
     api Ext.smartRefresh
+    //smartRefresh
+    api Ext.smartRefresh
+    //glide
+    api Ext.glide
 
 
 }

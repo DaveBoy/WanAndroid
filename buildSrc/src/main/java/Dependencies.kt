@@ -30,6 +30,7 @@ object Version {
     const val baseAdapterVersion="2.9.45-androidx"
     const val superTextVersion="2.2.4"
     const val smartVersion="1.1.0-andx-11"
+    const val glideVersion="4.9.0"
 }
 
 object Ext {
@@ -75,6 +76,8 @@ object Ext {
     const val baseAdapter ="com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.baseAdapterVersion}"
     const val superText ="com.github.lygttpod:SuperTextView:${Version.superTextVersion}"
     const val smartRefresh ="com.scwang.smartrefresh:SmartRefreshLayout:${Version.smartVersion}"
+    const val glide ="com.github.bumptech.glide:glide:${Version.glideVersion}"
+    const val glideCompiler ="com.github.bumptech.glide:compiler:${Version.glideVersion}"
 
 
 }

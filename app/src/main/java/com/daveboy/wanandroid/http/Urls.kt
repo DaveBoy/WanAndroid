@@ -9,5 +9,8 @@ object Urls {
     /**
      * 首页文章列表
      */
-    const val ARTICLE_LIST = "article/list/{page}/json"
+    const val ARTICLE_LIST = "article/list/{page}/json"/**
+     * 首页Banner
+     */
+    const val BANNER_LIST = "banner/json"
 }
