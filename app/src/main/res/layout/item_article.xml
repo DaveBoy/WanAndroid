@@ -54,18 +54,70 @@
             />
 
     <TextView
+            android:id="@+id/item_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/item_author"
+            app:layout_constraintTop_toTopOf="@id/item_time"
+            app:layout_constraintBottom_toBottomOf="@id/item_time"
+            android:textSize="@dimen/text_mini_12"
+            android:textColor="@color/red"
+            android:background="@drawable/shape_red"
+            android:paddingStart="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_5"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintEnd_toStartOf="@id/item_new"
+            android:text="置顶"
+            />
+    <TextView
+            android:id="@+id/item_new"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/item_top"
+            app:layout_constraintTop_toTopOf="@id/item_time"
+            app:layout_constraintBottom_toBottomOf="@id/item_time"
+            app:layout_goneMarginLeft="0dp"
+            android:textSize="@dimen/text_mini_12"
+            android:background="@drawable/shape_red"
+            android:paddingStart="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_5"
+            android:textColor="@color/red"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintEnd_toStartOf="@id/item_tag1"
+            android:text="新"
+            />
+
+    <TextView
+            android:id="@+id/item_tag1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/item_new"
+            app:layout_constraintTop_toTopOf="@id/item_time"
+            app:layout_constraintBottom_toBottomOf="@id/item_time"
+            android:textSize="@dimen/text_mini_12"
+            android:textColor="@color/green"
+            android:background="@drawable/shape_green"
+            android:paddingStart="@dimen/dp_5"
+            android:paddingEnd="@dimen/dp_5"
+            app:layout_goneMarginLeft="0dp"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintEnd_toStartOf="@id/item_time"
+            tools:text="标签"
+            />
+    <TextView
             android:id="@+id/item_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableStart="@mipmap/ic_time"
-            app:layout_constraintStart_toStartOf="@id/item_author"
+            app:layout_constraintStart_toEndOf="@id/item_tag1"
             app:layout_constraintTop_toBottomOf="@id/item_title"
             android:layout_marginTop="@dimen/dp_10"
-            android:drawablePadding="5dp"
+            android:drawablePadding="4dp"
             android:textSize="@dimen/text_mini_12"
+            android:layout_marginEnd="@dimen/dp_10"
+            app:layout_constraintEnd_toStartOf="@id/item_like"
             tools:text="5小时前"
             />
-
     <ImageView
             android:id="@+id/item_like"
             android:layout_width="wrap_content"

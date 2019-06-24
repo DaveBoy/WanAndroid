@@ -9,6 +9,7 @@ import androidx.viewpager.widget.ViewPager
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.database.Article
 import com.daveboy.wanandroid.ui.main.ui.viewPaper.BannerAdapter
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -55,24 +56,13 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
                 initData()
             }
         })
-       /* banner_vp.setOnTouchListener { v, event ->
-                when(event.action){
-                    MotionEvent.ACTION_DOWN->{
-                        viewModel.stopPlay()
-                    }
-                    MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL,MotionEvent.ACTION_OUTSIDE-> {
-                        viewModel.liveAutoPlay.value=true
-                        viewModel.startPlay()
-                    }
-                }
-             true
-        }*/
     }
 
     override fun initData() {
         viewModel.getArticleList()
         if( viewModel.page.value==0){
             viewModel.getBanner()
+            viewModel.getTopArticleList()
         }
     }
     override fun createObserver() {
@@ -83,9 +73,21 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
                 smart_ly.setEnableLoadMore(it.over.not())
                 if(page.value==1){
                     adapter.setNewData(it.datas)
+                    //文章列表后请求回来top被重置的问题
+                    val top = topArticleList.value
+                    if(top.isNullOrEmpty().not()){
+                        adapter.addData(0,top!!.map {
+                            it.toArticle()
+                        })
+                    }
                 }else{
                     adapter.addData(it.datas)
                 }
+            })
+            topArticleList.observe(this@IndexFragment, Observer {
+                adapter.addData(0,it.map {
+                    it.toArticle()
+                })
             })
             bannerList.observe(this@IndexFragment, Observer {
                 count=it.size

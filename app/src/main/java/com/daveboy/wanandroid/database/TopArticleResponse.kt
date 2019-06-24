@@ -8,30 +8,8 @@ import io.objectbox.annotation.Id
 import io.objectbox.converter.PropertyConverter
 
 @Entity
-data class ArticleResponse(
-    @Id
-    var dbId:Long=0,
-    val curPage: Int,
-    @Convert(converter =ArticleConvert::class,dbType = String::class )
-    val datas: List<Article>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
-)
-class ArticleConvert: PropertyConverter<List<Article>,String>{
-    override fun convertToDatabaseValue(entityProperty: List<Article>?): String {
-        return Gson().toJson(entityProperty)
-    }
+data class TopArticleResponse(
 
-    override fun convertToEntityProperty(databaseValue: String?): List<Article> {
-        return Gson().fromJson(databaseValue, object : TypeToken<List<Article>>() {
-        }.type)
-    }
-
-}
-open class Article(
     @Id
     var dbId:Long=0,
     val apkLink: String,
@@ -52,18 +30,27 @@ open class Article(
     val publishTime: Long,
     val superChapterId: Int,
     val superChapterName: String,
+    @Convert(converter =TagConvert::class,dbType = String::class )
     val tags: List<Tag>,
     val title: String,
     val type: Int,
     val userId: Int,
     val visible: Int,
-    val zan: Int,
-    val top:Boolean=false
-)
+    val zan: Int
 
-data class Tag(
-    @Id
-    var dbId:Long=0,
-    val name: String,
-    val url: String
-)
+){
+    fun toArticle():Article{
+        return Article(dbId, apkLink, author, chapterId, chapterName, collect, courseId, desc, envelopePic, fresh, id, link, niceDate, origin, prefix, projectLink, publishTime, superChapterId, superChapterName, tags, title, type, userId, visible, zan,top = true)
+    }
+}
+class TagConvert: PropertyConverter<List<Tag>, String> {
+    override fun convertToDatabaseValue(entityProperty: List<Tag>?): String {
+        return Gson().toJson(entityProperty)
+    }
+
+    override fun convertToEntityProperty(databaseValue: String?): List<Tag> {
+        return Gson().fromJson(databaseValue, object : TypeToken<List<Tag>>() {
+        }.type)
+    }
+
+}

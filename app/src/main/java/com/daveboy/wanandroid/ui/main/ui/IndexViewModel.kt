@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
 import com.daveboy.wanandroid.database.ArticleResponse
 import com.daveboy.wanandroid.database.BannerResponse
+import com.daveboy.wanandroid.database.TopArticleResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.isActive
@@ -14,11 +15,12 @@ import kotlinx.coroutines.launch
 class IndexViewModel: BaseViewModel() {
     val page= MutableLiveData(0)
     val articleList =MutableLiveData<ArticleResponse>()
+    val topArticleList =MutableLiveData<List<TopArticleResponse>>()
     val bannerList =MutableLiveData<List<BannerResponse>>()
     private val repository= IndexRepository()
     val errorMsg=MutableLiveData<String>()
 
-    val currentIndex=MutableLiveData(1)
+    val currentIndex=MutableLiveData<Int>()
     val liveAutoPlay=MutableLiveData(false)
     var job:Job?=null
     fun getArticleList(){
@@ -33,6 +35,25 @@ class IndexViewModel: BaseViewModel() {
                     LogUtils.i(it.data)
                     articleList.value=it.data
                     repository.insertArticleResponse(it.data)
+                }
+            }.onFailure {
+                it.printStackTrace()
+                errorMsg.value="网络请求失败${it.message}"
+            }
+
+        }
+    }
+    fun getTopArticleList(){
+        viewModelScope.launch {
+            runCatching {
+                repository.getTopArticleList()
+            }.onSuccess {
+                if(it.errorCode!=0){
+                    errorMsg.value=it.errorMsg
+                }else {
+                    LogUtils.i(it.data)
+                    topArticleList.value=it.data
+                    repository.insertTopArticleResponse(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()
