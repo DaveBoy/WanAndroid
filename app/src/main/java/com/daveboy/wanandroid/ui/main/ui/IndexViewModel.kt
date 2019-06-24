@@ -6,6 +6,9 @@ import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
 import com.daveboy.wanandroid.database.ArticleResponse
 import com.daveboy.wanandroid.database.BannerResponse
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class IndexViewModel: BaseViewModel() {
@@ -15,6 +18,9 @@ class IndexViewModel: BaseViewModel() {
     private val repository= IndexRepository()
     val errorMsg=MutableLiveData<String>()
 
+    val currentIndex=MutableLiveData(1)
+    val liveAutoPlay=MutableLiveData(false)
+    var job:Job?=null
     fun getArticleList(){
         viewModelScope.launch {
             runCatching {
@@ -51,6 +57,24 @@ class IndexViewModel: BaseViewModel() {
                 it.printStackTrace()
                 errorMsg.value="网络请求失败${it.message}"
             }
+
+        }
+    }
+    fun startPlay(){
+        if(liveAutoPlay.value==true&&job?.isActive!=true) {
+            job = viewModelScope.launch {
+                repeat(5) {
+                    delay(1000)
+                }
+                currentIndex.value = currentIndex.value!! + 1
+            }
+
+        }
+    }
+    fun stopPlay(){
+        liveAutoPlay.value=false
+        if(job?.isActive==true){
+            job?.cancel()
 
         }
     }

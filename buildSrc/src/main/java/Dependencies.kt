@@ -31,6 +31,7 @@ object Version {
     const val superTextVersion="2.2.4"
     const val smartVersion="1.1.0-andx-11"
     const val glideVersion="4.9.0"
+    const val bannerVersion="1.4.10"
 }
 
 object Ext {
@@ -78,6 +79,7 @@ object Ext {
     const val smartRefresh ="com.scwang.smartrefresh:SmartRefreshLayout:${Version.smartVersion}"
     const val glide ="com.github.bumptech.glide:glide:${Version.glideVersion}"
     const val glideCompiler ="com.github.bumptech.glide:compiler:${Version.glideVersion}"
+    const val banner ="com.youth.banner:banner:${Version.bannerVersion}"
 
 
 }
