@@ -1,13 +1,9 @@
 package com.daveboy.wanandroid.ui.main.search
 
-import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
-import android.widget.TextView
-import android.widget.Toast
+import androidx.lifecycle.Observer
 import com.blankj.utilcode.util.KeyboardUtils
-import com.daveboy.base.BaseActivity
 import com.daveboy.base.BaseVMActivity
-import com.daveboy.base.BaseVMFragment
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.search.fragment.SearchFragment
 import com.daveboy.wanandroid.ui.main.search.fragment.SearchResultFragment
@@ -21,6 +17,12 @@ class SearchActivity:BaseVMActivity<SearchViewModel>() {
     }
 
     override fun createObserver() {
+        viewModel.apply {
+            keyWord.observe(this@SearchActivity, Observer {
+                search_input.setText(it)
+                search_input.setSelection(it.length)
+            })
+        }
     }
 
 
@@ -40,11 +42,15 @@ class SearchActivity:BaseVMActivity<SearchViewModel>() {
 
         search_input.setOnEditorActionListener { v, actionId, event ->
             if(actionId == EditorInfo.IME_ACTION_SEARCH) {
-                start(SearchResultFragment())
+                if(findFragment(SearchResultFragment::class.java)==null)
+                    start(SearchResultFragment())
                 viewModel.keyWord.value=v.text.toString()
                 KeyboardUtils.hideSoftInput(this@SearchActivity)
             }
             false
+        }
+        search_back.setOnClickListener {
+            onBackPressed()
         }
     }
 

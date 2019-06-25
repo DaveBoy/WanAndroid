@@ -11,13 +11,11 @@ class HotKeyAdapter : BaseQuickAdapter<SearchKeyHot, BaseViewHolder>(R.layout.it
 
     override fun convert(helper: BaseViewHolder, item: SearchKeyHot) {
         helper.setText(R.id.item_key, item.name)
-            .addOnClickListener(R.id.item_key)
     }
 }
 class SiteAdapter : BaseQuickAdapter<Site, BaseViewHolder>(R.layout.item_search_key_and_site) {
 
     override fun convert(helper: BaseViewHolder, item: Site) {
         helper.setText(R.id.item_key, item.name)
-            .addOnClickListener(R.id.item_key)
     }
 }

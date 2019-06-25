@@ -2,8 +2,10 @@ package com.daveboy.wanandroid.ui.main.search.fragment
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.blankj.utilcode.util.KeyboardUtils
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.database.SearchKeyHot
 import com.daveboy.wanandroid.ui.main.search.HotKeyAdapter
 import com.daveboy.wanandroid.ui.main.search.SiteAdapter
 import com.google.android.flexbox.JustifyContent
@@ -37,8 +39,15 @@ class SearchFragment:BaseVMFragment<SearchViewModel>() {
 
     override fun initView() {
         hotKeyAdapter= HotKeyAdapter()
+        hotKeyAdapter.setOnItemClickListener { adapter, view, position ->
+            start(SearchResultFragment())
+            viewModel.keyWord.value=(adapter.data[position] as SearchKeyHot).name
+            KeyboardUtils.hideSoftInput(activity)
+        }
         siteAdapter= SiteAdapter()
+        siteAdapter.setOnItemClickListener { adapter, view, position ->
 
+        }
         val layoutManager = FlexboxLayoutManager(activity)
         layoutManager.flexDirection = FlexDirection.ROW
         layoutManager.justifyContent = JustifyContent.FLEX_START
