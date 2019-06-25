@@ -18,4 +18,16 @@ object Urls {
      * 首页Banner
      */
     const val BANNER_LIST = "banner/json"
+    /**
+     * 友链
+     */
+    const val SITE_LIST = "friend/json"
+    /**
+     * 热词
+     */
+    const val HOTKEY_LIST = "hotkey/json"
+    /**
+     * 文章搜索
+     */
+    const val ARTICLE_SEARCH_LIST = "article/query/{page}/json"
 }

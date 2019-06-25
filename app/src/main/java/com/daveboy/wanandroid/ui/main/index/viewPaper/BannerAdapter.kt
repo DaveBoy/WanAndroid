@@ -1,4 +1,4 @@
-package com.daveboy.wanandroid.ui.main.ui.viewPaper
+package com.daveboy.wanandroid.ui.main.index.viewPaper
 
 import android.view.View
 import android.view.ViewGroup

@@ -1,4 +1,4 @@
-package com.daveboy.wanandroid.ui.main.ui
+package com.daveboy.wanandroid.ui.main.index
 
 import com.daveboy.wanandroid.database.*
 import com.daveboy.wanandroid.http.RetrofitManager

@@ -1,4 +1,4 @@
-package com.daveboy.wanandroid.ui.main.ui
+package com.daveboy.wanandroid.ui.main.index
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +9,6 @@ import com.daveboy.wanandroid.database.BannerResponse
 import com.daveboy.wanandroid.database.TopArticleResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
 class IndexViewModel: BaseViewModel() {

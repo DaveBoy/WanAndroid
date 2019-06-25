@@ -70,6 +70,8 @@ dependencies {
     api Ext.smartRefresh
     //glide
     api Ext.glide
+    //flexbox
+    api Ext.flexbox
 
 
 }

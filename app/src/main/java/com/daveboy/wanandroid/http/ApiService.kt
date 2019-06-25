@@ -1,9 +1,6 @@
 package com.daveboy.wanandroid.http
 
-import com.daveboy.wanandroid.database.ArticleResponse
-import com.daveboy.wanandroid.database.BannerResponse
-import com.daveboy.wanandroid.database.TopArticleResponse
-import com.daveboy.wanandroid.database.UserModel
+import com.daveboy.wanandroid.database.*
 import retrofit2.http.*
 
 interface ApiService {
@@ -18,4 +15,12 @@ interface ApiService {
 
     @GET(Urls.BANNER_LIST)
     suspend fun getBannerList(): WanResponse<List<BannerResponse>>
+    @GET(Urls.HOTKEY_LIST)
+    suspend fun getHotKeyList(): WanResponse<List<SearchKeyHot>>
+    @GET(Urls.SITE_LIST)
+    suspend fun getSiteList(): WanResponse<List<Site>>
+
+    @FormUrlEncoded
+    @POST(Urls.ARTICLE_SEARCH_LIST)
+    suspend fun searchArticleList(@Path("page")page:Int,@Field("k")keyWord:String): WanResponse<ArticleResponse>
 }

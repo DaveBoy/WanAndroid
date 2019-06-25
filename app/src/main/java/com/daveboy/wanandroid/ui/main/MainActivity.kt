@@ -2,8 +2,7 @@ package com.daveboy.wanandroid.ui.main
 
 import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.ui.main.ui.IndexFragment
-import kotlinx.android.synthetic.main.activity_main.*
+import com.daveboy.wanandroid.ui.main.index.IndexFragment
 import me.yokeyword.fragmentation.SupportFragment
 
 class MainActivity : BaseActivity() {

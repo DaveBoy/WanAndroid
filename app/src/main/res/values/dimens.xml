@@ -6,4 +6,8 @@
     <dimen name="text_mini_12">12sp</dimen>
     <dimen name="dp_2">2dp</dimen>
     <dimen name="dp_5">5dp</dimen>
+    <dimen name="title_size">20sp</dimen>
+    <dimen name="title_size_mid">18sp</dimen>
+    <dimen name="dp_15">15dp</dimen>
+    <dimen name="sp_12">12sp</dimen>
 </resources>

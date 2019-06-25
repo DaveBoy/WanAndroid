@@ -32,6 +32,7 @@ object Version {
     const val smartVersion="1.1.0-andx-11"
     const val glideVersion="4.9.0"
     const val bannerVersion="1.4.10"
+    const val flexboxVersion="1.1.0"
 }
 
 object Ext {
@@ -80,6 +81,7 @@ object Ext {
     const val glide ="com.github.bumptech.glide:glide:${Version.glideVersion}"
     const val glideCompiler ="com.github.bumptech.glide:compiler:${Version.glideVersion}"
     const val banner ="com.youth.banner:banner:${Version.bannerVersion}"
+    const val flexbox ="com.google.android:flexbox:${Version.flexboxVersion}"
 
 
 }

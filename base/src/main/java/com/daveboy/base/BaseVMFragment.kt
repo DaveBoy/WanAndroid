@@ -19,7 +19,7 @@ abstract class BaseVMFragment<VM : BaseViewModel>: BaseFragment() {
     }
     abstract fun providerVMClass(): Class<VM>?
     abstract fun createObserver()
-    private fun initVM() {
+    open fun initVM() {
         providerVMClass()?.let {
             viewModel = ViewModelProviders.of(this).get(it)
         }
