@@ -30,4 +30,14 @@ object Urls {
      * 文章搜索
      */
     const val ARTICLE_SEARCH_LIST = "article/query/{page}/json"
+
+    /**
+     * 项目分类
+     */
+    const val TAB_LIST = "project/tree/json"
+
+    /**
+     * tab对应的项目列表
+     */
+    const val TAB_PROJECT_LIST = "project/list/{page}/json"
 }

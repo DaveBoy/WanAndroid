@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/dp_10"
+        >
+    <ImageView
+            android:id="@+id/project_img"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginTop="@dimen/dp_10"
+            app:layout_constraintDimensionRatio="1:2"/>
+    <TextView
+            android:id="@+id/project_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintStart_toEndOf="@id/project_img"
+            app:layout_constraintTop_toTopOf="@id/project_img"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="16sp"
+            android:textColor="#000"
+            android:layout_marginTop="@dimen/dp_10"
+            android:layout_marginEnd="@dimen/dp_20"
+            tools:text="标题"
+            />
+
+
+    <TextView
+            android:id="@+id/project_des"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="@id/project_title"
+            app:layout_constraintTop_toBottomOf="@id/project_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="@dimen/dp_20"
+            android:ellipsize="end"
+            app:layout_constraintBottom_toTopOf="@id/project_time"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:textSize="@dimen/text_mini_12"
+            android:layout_marginTop="@dimen/dp_10"
+            tools:text="内容"
+            />
+
+
+
+    <TextView
+            android:id="@+id/project_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/project_title"
+            app:layout_constraintBottom_toTopOf="@id/project_line"
+            android:layout_marginBottom="@dimen/dp_10"
+            android:layout_marginTop="@dimen/dp_10"
+            android:textSize="@dimen/text_mini_12"
+            android:layout_marginEnd="@dimen/dp_10"
+            tools:text="2018-08-08"
+            />
+    <TextView
+            android:id="@+id/project_author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toEndOf="@id/project_time"
+            app:layout_constraintTop_toTopOf="@id/project_time"
+            app:layout_constraintBottom_toBottomOf="@id/project_time"
+            android:layout_marginStart="@dimen/dp_20"
+            android:textSize="@dimen/text_mini_12"
+            tools:text="作者"
+            />
+    <ImageView
+            android:id="@+id/project_like"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="@dimen/dp_40"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/project_author"
+            app:layout_constraintBottom_toBottomOf="@id/project_author"
+            android:src="@mipmap/timeline_like_normal"
+            />
+    <View
+            android:id="@+id/project_line"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_10"
+            app:layout_constraintTop_toBottomOf="@id/project_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="@dimen/dp_10"
+            android:background="#25000000"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

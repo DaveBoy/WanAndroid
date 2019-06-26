@@ -1,6 +1,7 @@
 package com.daveboy.wanandroid.http
 
 import com.daveboy.wanandroid.database.*
+import com.google.gson.JsonArray
 import retrofit2.http.*
 
 interface ApiService {
@@ -23,4 +24,10 @@ interface ApiService {
     @FormUrlEncoded
     @POST(Urls.ARTICLE_SEARCH_LIST)
     suspend fun searchArticleList(@Path("page")page:Int,@Field("k")keyWord:String): WanResponse<ArticleResponse>
+
+    @GET(Urls.TAB_LIST)
+    suspend fun getTabList(): WanResponse<List<ProjectTab>>
+
+    @GET(Urls.TAB_PROJECT_LIST)
+    suspend fun getTabProjectList(@Path("page")page:Int,@Query("cid")cid:Int): WanResponse<TabProjectResponse>
 }
