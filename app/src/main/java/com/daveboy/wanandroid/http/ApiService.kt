@@ -30,4 +30,7 @@ interface ApiService {
 
     @GET(Urls.TAB_PROJECT_LIST)
     suspend fun getTabProjectList(@Path("page")page:Int,@Query("cid")cid:Int): WanResponse<TabProjectResponse>
+
+    @GET(Urls.SYSTEM_LIST)
+    suspend fun getSystemList(): WanResponse<List<SystemModel>>
 }

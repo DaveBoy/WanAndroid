@@ -8,18 +8,23 @@ import io.objectbox.annotation.Id
 import io.objectbox.converter.PropertyConverter
 
 @Entity
-data class ArticleResponse(
-    @Id
-    var dbId:Long=0,
-    val curPage: Int,
-    @Convert(converter =ArticleConvert::class,dbType = String::class )
-    val datas: List<Article>,
-    val offset: Int,
-    val over: Boolean,
-    val pageCount: Int,
-    val size: Int,
-    val total: Int
-)
+data class ArticleResponse{
+    constructor(
+        @Id
+        var dbId:Long=0,
+        val curPage: Int,
+        @Convert(converter =ArticleConvert::class,dbType = String::class )
+        val datas: List<Article>,
+        val offset: Int,
+        val over: Boolean,
+        val pageCount: Int,
+        val size: Int,
+        val total: Int
+    )
+    constructor(){
+
+    }
+}
 class ArticleConvert: PropertyConverter<List<Article>,String>{
     override fun convertToDatabaseValue(entityProperty: List<Article>?): String {
         return Gson().toJson(entityProperty)

@@ -40,4 +40,8 @@ object Urls {
      * tab对应的项目列表
      */
     const val TAB_PROJECT_LIST = "project/list/{page}/json"
+    /**
+     * 体系列表
+     */
+    const val SYSTEM_LIST = "tree/json"
 }

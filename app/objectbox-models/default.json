@@ -386,9 +386,53 @@
         }
       ],
       "relations": []
+    },
+    {
+      "id": "11:1251832422311597567",
+      "lastPropertyId": "9:6197071161650146543",
+      "name": "SystemModel",
+      "properties": [
+        {
+          "id": "1:3926652841483042635",
+          "name": "dbId"
+        },
+        {
+          "id": "2:8024505637326235499",
+          "name": "children"
+        },
+        {
+          "id": "3:579233031896106534",
+          "name": "courseId"
+        },
+        {
+          "id": "4:3248992331528577130",
+          "name": "id"
+        },
+        {
+          "id": "5:3887466878048380839",
+          "name": "name"
+        },
+        {
+          "id": "6:6974676189502223168",
+          "name": "order"
+        },
+        {
+          "id": "7:1063181862816679805",
+          "name": "parentChapterId"
+        },
+        {
+          "id": "8:2976582236608832521",
+          "name": "userControlSetTop"
+        },
+        {
+          "id": "9:6197071161650146543",
+          "name": "visible"
+        }
+      ],
+      "relations": []
     }
   ],
-  "lastEntityId": "10:260868821958161874",
+  "lastEntityId": "11:1251832422311597567",
   "lastIndexId": "0:0",
   "lastRelationId": "2:7839496073031597426",
   "lastSequenceId": "0:0",

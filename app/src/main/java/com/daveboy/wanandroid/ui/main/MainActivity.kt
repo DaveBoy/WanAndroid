@@ -5,6 +5,7 @@ import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
 import com.daveboy.wanandroid.ui.project.ProjectFragment
+import com.daveboy.wanandroid.ui.system.SystemFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import me.yokeyword.fragmentation.SupportFragment
@@ -32,10 +33,12 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         if(fragment==null){
             fragments[0]=IndexFragment()
             fragments[1]=ProjectFragment()
-            loadMultipleRootFragment(R.id.main_fraly, 0,fragments[0]!!, fragments[1]!!)
+            fragments[2]=SystemFragment()
+            loadMultipleRootFragment(R.id.main_fraly, 0,fragments[0]!!, fragments[1]!!,fragments[2]!!)
         }else{
             fragments[0]=fragment
             fragments[1]=findFragment(ProjectFragment::class.java)
+            fragments[2]=findFragment(SystemFragment::class.java)
         }
         nav_view.setOnNavigationItemSelectedListener(this)
     }

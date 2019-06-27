@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/base/WanAndroid-base.iml" filepath="$PROJECT_DIR$/base/WanAndroid-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/buildSrc/WanAndroid-buildSrc.iml" filepath="$PROJECT_DIR$/buildSrc/WanAndroid-buildSrc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/WanAndroid-common.iml" filepath="$PROJECT_DIR$/common/WanAndroid-common.iml" />
       <module fileurl="file://$PROJECT_DIR$/WanAndroidKotlin.iml" filepath="$PROJECT_DIR$/WanAndroidKotlin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
