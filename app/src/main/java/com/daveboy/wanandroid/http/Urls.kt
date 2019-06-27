@@ -44,4 +44,5 @@ object Urls {
      * 体系列表
      */
     const val SYSTEM_LIST = "tree/json"
+
 }

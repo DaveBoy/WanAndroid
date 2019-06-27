@@ -33,4 +33,7 @@ interface ApiService {
 
     @GET(Urls.SYSTEM_LIST)
     suspend fun getSystemList(): WanResponse<List<SystemModel>>
+
+    @GET(Urls.ARTICLE_LIST)
+    suspend fun getSystemArticleList(@Path("page")page:Int,@Query("cid")cid:Int): WanResponse<ArticleResponse>
 }

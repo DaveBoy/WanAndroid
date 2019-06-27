@@ -8,24 +8,20 @@ import io.objectbox.annotation.Id
 import io.objectbox.converter.PropertyConverter
 
 @Entity
-data class ArticleResponse{
-    constructor(
-        @Id
-        var dbId:Long=0,
-        val curPage: Int,
-        @Convert(converter =ArticleConvert::class,dbType = String::class )
-        val datas: List<Article>,
-        val offset: Int,
-        val over: Boolean,
-        val pageCount: Int,
-        val size: Int,
-        val total: Int
-    )
-    constructor(){
+data class ArticleResponse(
+    @Id
+    var dbId: Long = 0,
+    val curPage: Int,
+    @Convert(converter = ArticleConvert::class, dbType = String::class)
+    val datas: List<Article>,
+    val offset: Int,
+    val over: Boolean,
+    val pageCount: Int,
+    val size: Int,
+    val total: Int
+)
 
-    }
-}
-class ArticleConvert: PropertyConverter<List<Article>,String>{
+class ArticleConvert : PropertyConverter<List<Article>, String> {
     override fun convertToDatabaseValue(entityProperty: List<Article>?): String {
         return Gson().toJson(entityProperty)
     }
@@ -36,9 +32,10 @@ class ArticleConvert: PropertyConverter<List<Article>,String>{
     }
 
 }
+
 open class Article(
     @Id
-    var dbId:Long=0,
+    var dbId: Long = 0,
     val apkLink: String,
     val author: String,
     val chapterId: Int,
@@ -63,12 +60,12 @@ open class Article(
     val userId: Int,
     val visible: Int,
     val zan: Int,
-    val top:Boolean=false
+    val top: Boolean = false
 )
 
 data class Tag(
     @Id
-    var dbId:Long=0,
+    var dbId: Long = 0,
     val name: String,
     val url: String
 )

@@ -5,6 +5,7 @@
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:paddingBottom="@dimen/dp_10">
 
     <TextView
@@ -34,6 +35,9 @@
             android:textSize="@dimen/text_mini_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/system_title"
+            app:flexDirection="row"
+            app:justifyContent="flex_start"
+            app:flexWrap="wrap"
             tools:text="内容" />
 
     <View
