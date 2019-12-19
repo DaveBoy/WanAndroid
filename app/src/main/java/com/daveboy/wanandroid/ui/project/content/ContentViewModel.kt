@@ -4,11 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.wanandroid.database.*
-import com.daveboy.wanandroid.ui.main.index.IndexRepository
-import com.daveboy.wanandroid.ui.project.ProjectRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import com.daveboy.wanandroid.entity.*
 import kotlinx.coroutines.launch
 
 class ContentViewModel: BaseViewModel() {

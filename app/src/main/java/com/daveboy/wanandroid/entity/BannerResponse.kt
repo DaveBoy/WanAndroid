@@ -1,12 +1,9 @@
-package com.daveboy.wanandroid.database
+package com.daveboy.wanandroid.entity
 
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
 
-@Entity
+
+
 data class BannerResponse(
-    @Id
-    var dbId:Long=0,
     val desc: String,
     val id: Int,
     val imagePath: String,

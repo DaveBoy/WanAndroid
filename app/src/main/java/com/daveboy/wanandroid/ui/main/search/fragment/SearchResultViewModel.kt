@@ -4,12 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.wanandroid.database.ArticleResponse
-import com.daveboy.wanandroid.database.BannerResponse
-import com.daveboy.wanandroid.database.TopArticleResponse
-import com.daveboy.wanandroid.ui.main.index.IndexRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import com.daveboy.wanandroid.entity.ArticleResponse
 import kotlinx.coroutines.launch
 
 class SearchResultViewModel: BaseViewModel() {
@@ -29,7 +24,6 @@ class SearchResultViewModel: BaseViewModel() {
                     page.value=(page.value?:0)+1
                     LogUtils.i(it.data)
                     articleList.value=it.data
-                    //repository.insertArticleResponse(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()

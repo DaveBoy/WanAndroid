@@ -1,18 +1,8 @@
-package com.daveboy.wanandroid.database
+package com.daveboy.wanandroid.entity
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import io.objectbox.annotation.Convert
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.converter.PropertyConverter
-
-@Entity
 data class ArticleResponse(
-    @Id
-    var dbId: Long = 0,
+
     val curPage: Int,
-    @Convert(converter = ArticleConvert::class, dbType = String::class)
     val datas: List<Article>,
     val offset: Int,
     val over: Boolean,
@@ -21,21 +11,8 @@ data class ArticleResponse(
     val total: Int
 )
 
-class ArticleConvert : PropertyConverter<List<Article>, String> {
-    override fun convertToDatabaseValue(entityProperty: List<Article>?): String {
-        return Gson().toJson(entityProperty)
-    }
-
-    override fun convertToEntityProperty(databaseValue: String?): List<Article> {
-        return Gson().fromJson(databaseValue, object : TypeToken<List<Article>>() {
-        }.type)
-    }
-
-}
-
 open class Article(
-    @Id
-    var dbId: Long = 0,
+
     val apkLink: String,
     val author: String,
     val chapterId: Int,
@@ -64,8 +41,7 @@ open class Article(
 )
 
 data class Tag(
-    @Id
-    var dbId: Long = 0,
+
     val name: String,
     val url: String
 )

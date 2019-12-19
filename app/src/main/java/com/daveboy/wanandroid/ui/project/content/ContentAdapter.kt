@@ -4,7 +4,7 @@ import com.bumptech.glide.Glide
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.database.TabProject
+import com.daveboy.wanandroid.entity.TabProject
 
 class ContentAdapter:BaseQuickAdapter<TabProject,BaseViewHolder>(R.layout.item_project) {
     override fun convert(helper: BaseViewHolder, item: TabProject) {

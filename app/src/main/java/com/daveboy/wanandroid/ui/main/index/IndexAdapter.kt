@@ -4,7 +4,7 @@ import android.text.Html
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.database.Article
+import com.daveboy.wanandroid.entity.Article
 
 class IndexAdapter : BaseQuickAdapter<Article, BaseViewHolder>(R.layout.item_article) {
 

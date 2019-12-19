@@ -5,25 +5,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
-import me.yokeyword.fragmentation.SupportActivity
-import me.yokeyword.fragmentation.SupportFragment
+import com.daveboy.base.util.getVmClazz
+
 
 abstract class BaseVMFragment<VM : BaseViewModel>: BaseFragment() {
-    protected lateinit var viewModel: VM
+    protected val viewModel: VM by lazy {
+        initVM()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initVM()
+        startObserve()
         super.onViewCreated(view, savedInstanceState)
-        createObserver()
-    }
-    abstract fun providerVMClass(): Class<VM>?
-    abstract fun createObserver()
-    open fun initVM() {
-        providerVMClass()?.let {
-            viewModel = ViewModelProviders.of(this).get(it)
-        }
-    }
 
-
+    }
+    abstract fun startObserve()
+    private fun initVM(): VM {
+        return ViewModelProvider(this).get(getVmClazz(this) as Class<VM>)
+    }
 }

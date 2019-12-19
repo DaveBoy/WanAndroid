@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.KeyboardUtils
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.database.SearchKeyHot
+import com.daveboy.wanandroid.entity.SearchKeyHot
 import com.daveboy.wanandroid.ui.main.search.HotKeyAdapter
 import com.daveboy.wanandroid.ui.main.search.SiteAdapter
 import com.google.android.flexbox.JustifyContent

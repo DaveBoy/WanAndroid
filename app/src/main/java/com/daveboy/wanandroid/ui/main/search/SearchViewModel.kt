@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.wanandroid.database.*
+import com.daveboy.wanandroid.entity.*
 import kotlinx.coroutines.launch
 
 class SearchViewModel: BaseViewModel() {
@@ -25,7 +25,6 @@ class SearchViewModel: BaseViewModel() {
 
                     LogUtils.i(it.data)
                     hotKeyList.value=it.data
-                    repository.insertHotKey(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()
@@ -44,7 +43,6 @@ class SearchViewModel: BaseViewModel() {
                 }else {
                     LogUtils.i(it.data)
                     siteList.value=it.data
-                    repository.insertSite(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()

@@ -1,17 +1,7 @@
-package com.daveboy.wanandroid.database
+package com.daveboy.wanandroid.entity
 
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
-import io.objectbox.annotation.Convert
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
-import io.objectbox.converter.PropertyConverter
-@Entity
 data class TabProjectResponse(
-    @Id
-    var dbId:Long=0,
     val curPage: Int,
-    @Convert(converter =TabProjectConvert::class,dbType = String::class )
     val datas: List<TabProject>,
     val offset: Int,
     val over: Boolean,
@@ -19,17 +9,7 @@ data class TabProjectResponse(
     val size: Int,
     val total: Int
 )
-class TabProjectConvert: PropertyConverter<List<TabProject>, String> {
-    override fun convertToDatabaseValue(entityProperty: List<TabProject>?): String {
-        return Gson().toJson(entityProperty)
-    }
 
-    override fun convertToEntityProperty(databaseValue: String?): List<TabProject> {
-        return Gson().fromJson(databaseValue, object : TypeToken<List<TabProject>>() {
-        }.type)
-    }
-
-}
 data class TabProject(
     val apkLink: String,
     val author: String,

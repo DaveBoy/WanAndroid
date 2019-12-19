@@ -1,4 +1,4 @@
-package com.daveboy.common.Util
+package com.daveboy.common.util
 
 import com.blankj.utilcode.util.SPUtils
 

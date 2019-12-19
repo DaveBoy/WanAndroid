@@ -4,12 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.wanandroid.database.ArticleResponse
-import com.daveboy.wanandroid.database.BannerResponse
-import com.daveboy.wanandroid.database.SystemModel
-import com.daveboy.wanandroid.database.TopArticleResponse
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import com.daveboy.wanandroid.entity.SystemModel
 import kotlinx.coroutines.launch
 
 class SystemViewModel: BaseViewModel() {
@@ -27,7 +22,6 @@ class SystemViewModel: BaseViewModel() {
                 }else {
                     LogUtils.i(it.data)
                     systemList.value=it.data
-                    repository.insertSystem(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()

@@ -1,12 +1,7 @@
-package com.daveboy.wanandroid.database
+package com.daveboy.wanandroid.entity
 
-import io.objectbox.annotation.Entity
-import io.objectbox.annotation.Id
 
-@Entity
 data class UserModel(
-    @Id
-    var dbId:Long=0,
     val admin: Boolean,
    /* val chapterTops: List<Any>,
     val collectIds: List<Int>,*/

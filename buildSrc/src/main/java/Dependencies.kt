@@ -1,7 +1,7 @@
 object AppConfig {
     const val versionName = "1.0"
     const val versionCode = 1
-    const val applicationId = "win.regin.mvvm"
+    const val applicationId = "com.daveboy.wanandroid"
     const val buildToolsVersion = "29.0.0"
     const val compileSdkVersion = 28
     const val targetSdkVersion = 28
@@ -26,13 +26,13 @@ object Version {
     const val materialVersion = "1.1.0-alpha07"
     const val objectboxVersion  = "2.3.4"
     const val utilcodeVersion="1.24.4"
-    const val fragmentationVersion="1.0.1"
     const val baseAdapterVersion="2.9.45-androidx"
-    const val superTextVersion="2.2.4"
     const val smartVersion="1.1.0-andx-11"
     const val glideVersion="4.9.0"
-    const val bannerVersion="1.4.10"
     const val flexboxVersion="1.1.0"
+    const val koin_version="2.1.0-alpha-8"
+    const val viewPaper2Version="1.0.0"
+
 }
 
 object Ext {
@@ -42,7 +42,9 @@ object Ext {
     const val appcompat = "androidx.appcompat:appcompat:${Version.appcompatVersion}"
     const val ktx = "androidx.core:core-ktx:${Version.ktxVersion}"
     const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Version.constraintlayoutVersion}"
+    const val viewPaper2 = "androidx.viewpager2:viewpager2:${Version.viewPaper2Version}"
 
+    //test
     const val junit = "junit:junit:${Version.junitVersion}"
     const val extUnit = "androidx.test.ext:junit:${Version.extUnitVersion}"
     const val espresso = "androidx.test.espresso:espresso-core:${Version.espressoVersion}"
@@ -59,29 +61,24 @@ object Ext {
     //https://github.com/Kotlin/kotlinx.coroutines
     const val coroutines = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Version.coroutinesVersion}"
     const val anko = "org.jetbrains.anko:anko-commons:${Version.ankoVersion}"
-    const val material = "com.google.android.material:material:${Version.materialVersion}"
 
-    // objectbox
-    const val objectboxProcessor = "io.objectbox:objectbox-processor:${Version.objectboxVersion}"
-    const val objectboxKotlin = "io.objectbox:objectbox-kotlin:${Version.objectboxVersion}"
-    const val objectboxAndroid = "io.objectbox:objectbox-android:${Version.objectboxVersion}"
-    const val objectboxGradlePlugin = "io.objectbox:objectbox-gradle-plugin:${Version.objectboxVersion}"
-    const val objectboxBrowser = "io.objectbox:objectbox-android-objectbrowser:${Version.objectboxVersion}"
+
+    const val material = "com.google.android.material:material:${Version.materialVersion}"
 
     //util
     const val util = "com.blankj:utilcodex:${Version.utilcodeVersion}"
 
-    //fragment
-    const val fragmentation ="me.yokeyword:fragmentationx:${Version.fragmentationVersion}"
-
     //baseAdapter
     const val baseAdapter ="com.github.CymChad:BaseRecyclerViewAdapterHelper:${Version.baseAdapterVersion}"
-    const val superText ="com.github.lygttpod:SuperTextView:${Version.superTextVersion}"
+
     const val smartRefresh ="com.scwang.smartrefresh:SmartRefreshLayout:${Version.smartVersion}"
     const val glide ="com.github.bumptech.glide:glide:${Version.glideVersion}"
     const val glideCompiler ="com.github.bumptech.glide:compiler:${Version.glideVersion}"
-    const val banner ="com.youth.banner:banner:${Version.bannerVersion}"
     const val flexbox ="com.google.android:flexbox:${Version.flexboxVersion}"
 
-
+    // Koin https://github.com/InsertKoinIO/koin
+    const val koinAndroid= "org.koin:koin-androidx-scope:${Version.koin_version}"
+    const val koinViewModel= "org.koin:koin-androidx-viewmodel:${Version.koin_version}"
+    const val koinFragment= "org.koin:koin-androidx-fragment:${Version.koin_version}"
+    const val koinExt= "org.koin:koin-androidx-ext:${Version.koin_version}"
 }

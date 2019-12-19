@@ -1,26 +1,19 @@
 package com.daveboy.base
 
-import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.lifecycle.ViewModelProviders
-import me.yokeyword.fragmentation.SupportActivity
+import androidx.lifecycle.ViewModelProvider
+import com.daveboy.base.util.getVmClazz
 
 abstract class BaseVMActivity<VM : BaseViewModel>: BaseActivity() {
-    protected lateinit var viewModel: VM
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        createObserver()
-    }
-    override fun afterSetView() {
+    protected val viewModel: VM by lazy {
         initVM()
     }
-    abstract fun providerVMClass(): Class<VM>?
-    abstract fun createObserver()
-    private fun initVM() {
-        providerVMClass()?.let {
-            viewModel = ViewModelProviders.of(this).get(it)
-        }
+    override fun afterSetView() {
+        startObserve()
+        super.afterSetView()
+    }
+    abstract fun startObserve()
+    private fun initVM(): VM {
+        return ViewModelProvider(this).get(getVmClazz(this) as Class<VM>)
     }
 
 

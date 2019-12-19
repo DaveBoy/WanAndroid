@@ -1,7 +1,6 @@
 package com.daveboy.wanandroid.http
 
-import com.daveboy.wanandroid.database.*
-import com.google.gson.JsonArray
+import com.daveboy.wanandroid.entity.*
 import retrofit2.http.*
 
 interface ApiService {

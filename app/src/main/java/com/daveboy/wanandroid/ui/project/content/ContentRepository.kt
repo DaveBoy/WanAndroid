@@ -1,12 +1,10 @@
 package com.daveboy.wanandroid.ui.project.content
 
-import com.daveboy.wanandroid.database.*
+import com.daveboy.wanandroid.entity.*
 import com.daveboy.wanandroid.http.RetrofitManager
 import com.daveboy.wanandroid.http.WanResponse
 import io.objectbox.Box
-import io.objectbox.kotlin.boxFor
 import io.objectbox.kotlin.query
-import okhttp3.internal.Util.equal
 
 class ContentRepository {
     private lateinit var tabProjectResponseBox : Box<TabProjectResponse>

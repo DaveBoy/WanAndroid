@@ -9,8 +9,6 @@ android {
 
 
     defaultConfig {
-
-
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
@@ -23,12 +21,6 @@ android {
     }
 
 }
-//此依赖主要用于browser，可以在浏览器中查看app的数据
-dependencies {
-    debugApi Ext.objectboxBrowser
-    releaseApi Ext.objectboxAndroid
-}
-apply plugin: 'io.objectbox' // apply last
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api Ext.kotlin
@@ -41,6 +33,7 @@ dependencies {
 
     api Ext.material
     api Ext.constraintlayout
+    api Ext.viewPaper2
     api Ext.lifecycle
     api Ext.viewmodelKtx
     //http
@@ -57,15 +50,9 @@ dependencies {
     androidTestImplementation Ext.espresso
 
 
-    //objectBox
-   // api Ext.objectboxAndroid
-    api Ext.objectboxKotlin
-    //fragmentation
-    api Ext.fragmentation
+
     //baseAdapter
     api Ext.baseAdapter
-    //smartRefresh
-    api Ext.smartRefresh
     //smartRefresh
     api Ext.smartRefresh
     //glide
@@ -73,6 +60,10 @@ dependencies {
     //flexbox
     api Ext.flexbox
 
-
+    //koin
+    api Ext.koinAndroid
+    api Ext.koinViewModel
+    api Ext.koinExt
+    api Ext.koinFragment
 }
 

@@ -3,7 +3,7 @@ package com.daveboy.wanandroid.ui.main.index.viewPaper
 import android.view.View
 import android.view.ViewGroup
 import androidx.viewpager.widget.PagerAdapter
-import com.daveboy.wanandroid.database.BannerResponse
+import com.daveboy.wanandroid.entity.BannerResponse
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.ImageView

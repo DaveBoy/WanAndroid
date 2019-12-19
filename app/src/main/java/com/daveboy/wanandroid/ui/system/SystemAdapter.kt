@@ -3,12 +3,11 @@ package com.daveboy.wanandroid.ui.system
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.TextView
-import androidx.core.view.marginStart
 import com.blankj.utilcode.util.ConvertUtils
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.BaseViewHolder
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.database.SystemModel
+import com.daveboy.wanandroid.entity.SystemModel
 import com.google.android.flexbox.FlexboxLayout
 
 class SystemAdapter:BaseQuickAdapter<SystemModel,BaseViewHolder>(R.layout.item_system) {

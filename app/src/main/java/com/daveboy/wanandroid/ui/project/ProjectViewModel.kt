@@ -4,13 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
-import com.daveboy.wanandroid.database.ArticleResponse
-import com.daveboy.wanandroid.database.BannerResponse
-import com.daveboy.wanandroid.database.ProjectTab
-import com.daveboy.wanandroid.database.TopArticleResponse
-import com.daveboy.wanandroid.ui.main.index.IndexRepository
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
+import com.daveboy.wanandroid.entity.ProjectTab
 import kotlinx.coroutines.launch
 
 class ProjectViewModel: BaseViewModel() {
@@ -28,7 +22,6 @@ class ProjectViewModel: BaseViewModel() {
                 }else {
                     LogUtils.i(it.data)
                     tabList.value=it.data
-                    repository.insertTab(it.data)
                 }
             }.onFailure {
                 it.printStackTrace()

@@ -2,8 +2,8 @@ package com.daveboy.wanandroid.http
 
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.common.SP_COOKIE
-import com.daveboy.common.Util.getString
-import com.daveboy.common.Util.put
+import com.daveboy.common.util.getString
+import com.daveboy.common.util.put
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

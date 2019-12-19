@@ -26,8 +26,6 @@ android {
 dependencies {
     api project(path: ':common')
 
-
-
     //test
     testImplementation Ext.junit
     androidTestImplementation Ext.extUnit

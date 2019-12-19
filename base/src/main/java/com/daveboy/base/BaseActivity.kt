@@ -1,11 +1,9 @@
 package com.daveboy.base
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
-import androidx.lifecycle.ViewModelProviders
-import me.yokeyword.fragmentation.SupportActivity
+import androidx.appcompat.app.AppCompatActivity
 
-abstract class BaseActivity: SupportActivity() {
+abstract class BaseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
