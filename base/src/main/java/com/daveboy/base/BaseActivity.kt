@@ -18,4 +18,10 @@ abstract class BaseActivity: AppCompatActivity() {
     abstract fun initView()
     abstract fun initListener()
     abstract fun initData()
+    fun showProgress(){
+
+    }
+    fun dismissProgress(){
+
+    }
 }

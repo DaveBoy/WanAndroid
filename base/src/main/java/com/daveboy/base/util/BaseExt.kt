@@ -2,7 +2,11 @@ package com.daveboy.base.util
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.daveboy.base.BaseResponse
+import com.daveboy.base.BaseVMActivity
+import com.daveboy.base.BaseVMFragment
 import com.daveboy.base.BaseViewModel
+import com.daveboy.base.core.RequestException
 import com.daveboy.base.core.ViewState
 import kotlinx.coroutines.launch
 import java.lang.reflect.ParameterizedType
@@ -26,10 +30,10 @@ fun <VM> getVmClazz(obj: Any): VM {
  * @param onError 失败回调
  *
  */
-fun <T> BaseVmActivity<*>.parseState(
+fun <T> BaseVMActivity<*>.parseState(
     viewState: ViewState<T>,
     onSuccess: (T) -> Unit,
-    onError: ((AppException) -> Unit)? = null,
+    onError: ((RequestException) -> Unit)? = null,
     onLoading: (() -> Unit)? = null
 ) {
     when (viewState) {
@@ -43,18 +47,18 @@ fun <T> BaseVmActivity<*>.parseState(
         }
         is ViewState.Error -> {
             dismissProgress()
-            onError?.run { this(viewState.error) }
+            onError?.run { this(viewState.exception) }
         }
     }
 }
 
-fun <T> BaseVmFragment<*>.parseState(
+fun <T> BaseVMFragment<*>.parseState(
     viewState: ViewState<T>,
     onSuccess: (T) -> Unit,
-    onError: ((AppException) -> Unit)? = null,
+    onError: ((RequestException) -> Unit)? = null,
     onLoading: (() -> Unit)? = null
 ) {
-    (activity as? BaseVmActivity<*>)?.parseState(viewState, onSuccess, onError, onLoading)
+    (activity as? BaseVMActivity<*>)?.parseState(viewState, onSuccess, onError, onLoading)
 }
 
 /**
@@ -67,7 +71,22 @@ fun Throwable?.parseErrorString(): String {
         else ->"其他错误"
     }
 }
+/**
+ * 处理返回值
+ *
+ * @param result 请求结果
+ */
+fun <T> MutableLiveData<ViewState<T>>.paresResult(result: BaseResponse<T>) {
+    value = if (result.isSuccess()) ViewState.onSuccess(result.data) else
+        ViewState.onError(RequestException(result.getErrorInfo()))
+}
 
+/**
+ * 异常转换异常处理
+ */
+fun <T> MutableLiveData<ViewState<T>>.paresException(e: Throwable) {
+    this.value = ViewState.onError(RequestException(e))
+}
 /**
  * net request
  * @param request request method
@@ -75,13 +94,13 @@ fun Throwable?.parseErrorString(): String {
  * @param showLoading 配置是否显示等待框
  */
 fun <T> BaseViewModel.launchRequest(
-    request: suspend () -> BaseEntity<T>,
+    request: suspend () -> BaseResponse<T>,
     viewState: MutableLiveData<ViewState<T>>,
     showLoading: Boolean = true
 ) {
     viewModelScope.launch {
         runCatching {
-            if (showLoading) viewState.value = ViewState.onAppLoading()
+            if (showLoading) viewState.value = ViewState.onLoading()
             request()
         }.onSuccess {
             viewState.paresResult(it)

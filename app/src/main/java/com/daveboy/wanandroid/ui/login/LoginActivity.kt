@@ -1,10 +1,13 @@
 package com.daveboy.wanandroid.ui.login
 
-import android.content.Intent
 import android.view.View
 import androidx.lifecycle.Observer
-import com.blankj.utilcode.util.ToastUtils
 import com.daveboy.base.BaseVMActivity
+import com.daveboy.base.util.parseState
+import com.daveboy.common.listener.textWatcher
+import com.daveboy.common.util.startActivityExt
+import com.daveboy.common.util.textStr
+import com.daveboy.common.util.toast
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
@@ -13,15 +16,15 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
     override fun getLayoutId() = R.layout.activity_login
     override fun startObserve() {
         viewModel.apply {
-            loginState.observe(this@LoginActivity, Observer {
-                startActivity(Intent().apply {
-                    setClass(this@LoginActivity, MainActivity::class.java)
-                    this@LoginActivity.finish()
+            requestState.observe(this@LoginActivity, Observer {
+                parseState(it,{
+                    startActivityExt<MainActivity>()
+                    finish()
+                },{
+                    toast(text=it.summary)
                 })
             })
-            errorMsg.observe(this@LoginActivity, Observer {
-                ToastUtils.showShort(it)
-            })
+            uiState.observe(this@LoginActivity, Observer { login.isEnabled=it.loginEnable })
         }
     }
 
@@ -30,6 +33,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
 
     override fun initListener() {
         login.setOnClickListener(onclickListener)
+        login.textWatcher { afterTextChanged { viewModel.loginInputChange(username.textStr,password.textStr) } }
     }
 
     private fun login() {
@@ -41,4 +45,5 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
             R.id.login -> login()
         }
     }
+
 }

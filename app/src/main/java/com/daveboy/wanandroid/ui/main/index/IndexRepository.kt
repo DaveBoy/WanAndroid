@@ -2,19 +2,19 @@ package com.daveboy.wanandroid.ui.main.index
 
 import com.daveboy.wanandroid.entity.*
 import com.daveboy.wanandroid.http.RetrofitManager
-import com.daveboy.wanandroid.http.WanResponse
+import com.daveboy.base.BaseResponse
 
 
 class IndexRepository {
 
 
-    suspend fun getArticleList(page:Int): WanResponse<ArticleResponse>{
+    suspend fun getArticleList(page:Int): BaseResponse<ArticleResponse> {
         return RetrofitManager.service.getArticleList(page)
     }
-    suspend fun getTopArticleList(): WanResponse<List<TopArticleResponse>>{
+    suspend fun getTopArticleList(): BaseResponse<List<TopArticleResponse>> {
         return RetrofitManager.service.getTopArticleList()
     }
-    suspend fun getBannerList(): WanResponse<List<BannerResponse>> {
+    suspend fun getBannerList(): BaseResponse<List<BannerResponse>> {
         return RetrofitManager.service.getBannerList()
     }
 }
