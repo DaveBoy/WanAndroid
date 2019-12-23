@@ -4,42 +4,35 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
+import com.daveboy.base.core.ViewState
+import com.daveboy.base.util.launchRequest
 import com.daveboy.wanandroid.entity.ArticleResponse
 import com.daveboy.wanandroid.entity.BannerResponse
 import com.daveboy.wanandroid.entity.TopArticleResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.core.inject
 
 class IndexViewModel: BaseViewModel() {
-    val page= MutableLiveData(0)
-    val articleList =MutableLiveData<ArticleResponse>()
+    private val repository:IndexRepository by inject()
+
+
+    private var page= 0
+
+    val requestState=MutableLiveData<ViewState<ArticleResponse>>()
+
+
+
     val topArticleList =MutableLiveData<List<TopArticleResponse>>()
     val bannerList =MutableLiveData<List<BannerResponse>>()
-    private val repository= IndexRepository()
-    val errorMsg=MutableLiveData<String>()
 
     val currentIndex=MutableLiveData<Int>()
     val liveAutoPlay=MutableLiveData(false)
     var job:Job?=null
-    fun getArticleList(){
-        viewModelScope.launch {
-            runCatching {
-                repository.getArticleList(page.value?:0)
-            }.onSuccess {
-                if(it.errorCode!=0){
-                    errorMsg.value=it.errorMsg
-                }else {
-                    page.value=(page.value?:0)+1
-                    LogUtils.i(it.data)
-                    articleList.value=it.data
-                }
-            }.onFailure {
-                it.printStackTrace()
-                errorMsg.value="网络请求失败${it.message}"
-            }
-
-        }
+    fun getArticleList(refresh:Boolean){
+        if(refresh) page=0
+        launchRequest({repository.getArticleList(page)},requestState,success = {page++})
     }
     fun getTopArticleList(){
         viewModelScope.launch {
@@ -64,6 +57,7 @@ class IndexViewModel: BaseViewModel() {
             runCatching {
                 repository.getBannerList()
             }.onSuccess {
+                parse
                 if(it.errorCode!=0){
                     errorMsg.value=it.errorMsg
                 }else {

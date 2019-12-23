@@ -7,17 +7,20 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.daveboy.base.BaseVMFragment
+import com.daveboy.base.core.ViewState
+import com.daveboy.base.util.parseState
+import com.daveboy.common.util.startActivityExt
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.viewPaper.BannerAdapter
 import com.daveboy.wanandroid.ui.main.search.SearchActivity
+import com.daveboy.wanandroid.util.finish
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_index.*
 
 class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeListener{
 
-    override fun providerVMClass()= IndexViewModel::class.java
-    private lateinit var adapter:IndexAdapter
+    private lateinit var articleAdapter:IndexAdapter
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var banner_vp:ViewPager
     private var count= 0
@@ -26,70 +29,70 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
     }
 
     override fun initView() {
-        if(::adapter.isInitialized.not()){
-            adapter= IndexAdapter()
+        index_rv.apply {
+            articleAdapter= IndexAdapter()
+            articleAdapter.onAttachedToRecyclerView(this)
+            layoutManager=LinearLayoutManager(activity)
+            adapter=articleAdapter
         }
-        index_rv.layoutManager=LinearLayoutManager(activity)
-        adapter.onAttachedToRecyclerView(index_rv)
-        index_rv.adapter=adapter
+        bannerAdapter= BannerAdapter(activity!!)
 
-        if(::bannerAdapter.isInitialized.not()){
-            bannerAdapter= BannerAdapter(activity!!)
-        }
         val header: View = LayoutInflater.from(context).inflate(R.layout.layout_banner, index_rv, false)
 
         banner_vp=header.findViewById(R.id.view_paper)
         banner_vp.adapter=bannerAdapter
         banner_vp.addOnPageChangeListener(this)
-        adapter.addHeaderView(header)
+        articleAdapter.addHeaderView(header)
     }
 
     override fun initListener() {
         smart_ly.setOnRefreshLoadMoreListener(object:OnRefreshLoadMoreListener{
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-                initData()
+                getArticle()
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
-                viewModel.page.value=0
-                initData()
+                getArticle(refresh = true)
             }
         })
         index_search.setOnClickListener {
-            startActivity(Intent().apply {
-                setClass(activity!!, SearchActivity::class.java)
-            })
+            startActivityExt<SearchActivity>()
         }
     }
 
     override fun initData() {
-        viewModel.getArticleList()
-        if( viewModel.page.value==0){
-            viewModel.getBanner()
-            viewModel.getTopArticleList()
-        }
+        getArticle(true)
+        viewModel.getBanner()
+        viewModel.getTopArticleList()
     }
-    override fun createObserver() {
+    private fun getArticle(refresh:Boolean=false){
+        viewModel.getArticleList(refresh)
+    }
+    override fun startObserve() {
         viewModel.apply {
-            articleList.observe(this@IndexFragment, Observer {
-                smart_ly.finishRefresh()
-                smart_ly.finishLoadMore()
+            requestState.observe(this@IndexFragment, Observer {
+                parseState(it,{
+                    smart_ly.finish()
+
+                })
+
+
                 smart_ly.setEnableLoadMore(it.over.not())
                 if(page.value==1){
-                    adapter.setNewData(it.datas)
+                    articleAdapter.setNewData(it.datas)
                     //文章列表后请求回来top被重置的问题
                     val top = topArticleList.value
                     if(top.isNullOrEmpty().not()){
-                        adapter.addData(0,top!!.map {
+                        articleAdapter.addData(0,top!!.map {
                             it.toArticle()
                         })
                     }
                 }else{
-                    adapter.addData(it.datas)
+                    articleAdapter.addData(it.datas)
                 }
             })
             topArticleList.observe(this@IndexFragment, Observer {
-                adapter.addData(0,it.map {
+                articleAdapter.addData(0,it.map {
                     it.toArticle()
                 })
             })

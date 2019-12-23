@@ -9,16 +9,15 @@ import com.daveboy.wanandroid.ui.project.ProjectFragment
 import com.daveboy.wanandroid.ui.system.SystemFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-
-
+import org.koin.android.ext.android.get
 
 
 class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
     private  val fragments:List<Fragment>
     init {
-        val index=IndexFragment()
-        val project=ProjectFragment()
-        val system=SystemFragment()
+        val index=get<IndexFragment>()
+        val project=get<ProjectFragment>()
+        val system=get<SystemFragment>()
         fragments= listOf(index,project,system)
     }
 

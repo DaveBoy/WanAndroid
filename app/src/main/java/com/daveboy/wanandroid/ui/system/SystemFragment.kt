@@ -41,7 +41,7 @@ class SystemFragment :BaseVMFragment<SystemViewModel>(){
     override fun initData() {
         viewModel.getSystemList()
     }
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             systemList.observe(this@SystemFragment, Observer {
                 smart_ly.finishRefresh()

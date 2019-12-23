@@ -3,6 +3,7 @@ package com.daveboy.wanandroid
 import android.app.Application
 import com.daveboy.wanandroid.di.diModules
 import org.koin.android.ext.koin.androidContext
+import org.koin.androidx.fragment.koin.fragmentFactory
 import org.koin.core.context.startKoin
 
 import kotlin.properties.Delegates
@@ -19,6 +20,7 @@ class CustomApplication:Application() {
     private fun initKoin() {
         startKoin {
             this.androidContext(this@CustomApplication)
+            fragmentFactory()
             this.modules(diModules)
         }
     }

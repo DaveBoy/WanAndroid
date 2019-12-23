@@ -22,7 +22,7 @@ class SearchFragment:BaseVMFragment<SearchViewModel>() {
         return SearchViewModel::class.java
     }
 
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             hotKeyList.observe(this@SearchFragment, Observer {
                 hotKeyAdapter.setNewData(it)

@@ -56,7 +56,7 @@ class SystemContentFragment :BaseVMFragment<SystemContentViewModel>(){
     override fun initData() {
         viewModel.getArticleList()
     }
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             articleList.observe(this@SystemContentFragment, Observer {
                 smart_ly.finishRefresh()

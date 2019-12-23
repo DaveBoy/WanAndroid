@@ -96,15 +96,19 @@ fun <T> MutableLiveData<ViewState<T>>.paresException(e: Throwable) {
 fun <T> BaseViewModel.launchRequest(
     request: suspend () -> BaseResponse<T>,
     viewState: MutableLiveData<ViewState<T>>,
-    showLoading: Boolean = true
+    showLoading: Boolean = true,
+    success:(BaseResponse<T>)->Unit={},
+    error:(Throwable)->Unit={}
 ) {
     viewModelScope.launch {
         runCatching {
             if (showLoading) viewState.value = ViewState.onLoading()
             request()
         }.onSuccess {
+            success.invoke(it)
             viewState.paresResult(it)
         }.onFailure {
+            error.invoke(it)
             viewState.paresException(it)
         }
     }

@@ -27,7 +27,7 @@ class SearchResultFragment:BaseVMFragment<SearchViewModel>() {
         return SearchViewModel::class.java
     }
 
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             keyWord.observe(this@SearchResultFragment, Observer {
                 searchViewModel.page.value=0

@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.fragment_project.*
 
 class ProjectFragment :BaseVMFragment<ProjectViewModel>(){
     private lateinit var projectAdapter: ProjectAdapter
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             tabList.observe(this@ProjectFragment, Observer {list->
                 val fragments=ArrayList<Fragment>()

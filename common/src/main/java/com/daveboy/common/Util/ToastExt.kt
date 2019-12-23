@@ -1,6 +1,5 @@
 package com.daveboy.common.util
 
-import android.app.Activity
 import com.blankj.utilcode.util.ToastUtils
 
 fun toast(res:Int?=null,text:String?=null){
@@ -11,3 +10,5 @@ fun toast(res:Int?=null,text:String?=null){
         ToastUtils.showShort(it)
     }
 }
+fun String.toast()= toast(text=this)
+fun Int.toast()= toast(res=this)

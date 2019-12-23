@@ -12,11 +12,9 @@ import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity:BaseVMActivity<SearchViewModel>() {
     private var searchFragment:SearchFragment?=null
-    override fun providerVMClass(): Class<SearchViewModel>? {
-        return SearchViewModel::class.java
-    }
 
-    override fun createObserver() {
+
+    override fun startObserve() {
         viewModel.apply {
             keyWord.observe(this@SearchActivity, Observer {
                 search_input.setText(it)

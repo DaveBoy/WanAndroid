@@ -15,7 +15,7 @@ class ProjectContentFragment  : BaseVMFragment<ContentViewModel>(){
         return ContentViewModel::class.java
     }
 
-    override fun createObserver() {
+    override fun startObserve() {
         viewModel.apply {
             tabProjectResponse.observe(this@ProjectContentFragment, Observer {
                 smart_ly.finishRefresh()

@@ -21,7 +21,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
                     startActivityExt<MainActivity>()
                     finish()
                 },{
-                    toast(text=it.summary)
+                    it.summary?.toast()
                 })
             })
             uiState.observe(this@LoginActivity, Observer { login.isEnabled=it.loginEnable })
