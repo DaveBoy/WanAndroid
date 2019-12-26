@@ -33,9 +33,7 @@ class ProjectFragment :BaseVMFragment<ProjectViewModel>(){
     }
 
     override fun initView() {
-        if(::projectAdapter.isInitialized.not()){
-            projectAdapter= ProjectAdapter(childFragmentManager)
-        }
+        projectAdapter= ProjectAdapter(childFragmentManager)
         project_vp.adapter=projectAdapter
         project_tab.setupWithViewPager(project_vp)
     }
@@ -46,8 +44,6 @@ class ProjectFragment :BaseVMFragment<ProjectViewModel>(){
     override fun initData() {
         viewModel.getTabList()
     }
-
-    override fun providerVMClass()= ProjectViewModel::class.java
 
 
 }

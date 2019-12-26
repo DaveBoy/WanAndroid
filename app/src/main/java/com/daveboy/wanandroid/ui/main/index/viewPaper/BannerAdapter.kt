@@ -1,26 +1,17 @@
 package com.daveboy.wanandroid.ui.main.index.viewPaper
 
-import android.view.View
-import android.view.ViewGroup
-import androidx.viewpager.widget.PagerAdapter
-import com.daveboy.wanandroid.entity.BannerResponse
-import android.content.Context
-import android.view.LayoutInflater
+import android.media.Image
 import android.widget.ImageView
 import com.blankj.utilcode.util.LogUtils
 import com.bumptech.glide.Glide
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.BaseViewHolder
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.entity.BannerResponse
 
 
-class BannerAdapter( private val context:Context) :PagerAdapter(){
-    private var data:MutableList<BannerResponse> = ArrayList()
-    override fun isViewFromObject(view: View, `object`: Any): Boolean {
-        return view == `object`
-    }
+class BannerAdapter :BaseQuickAdapter<BannerResponse,BaseViewHolder>(R.layout.item_banner){
 
-    override fun getCount(): Int {
-        return data.size
-    }
     fun setData(list:MutableList<BannerResponse>){
         if(list.isNullOrEmpty())
             return
@@ -30,26 +21,14 @@ class BannerAdapter( private val context:Context) :PagerAdapter(){
         data.add(list[0])
         notifyDataSetChanged()
     }
-
-    override fun destroyItem(container: ViewGroup, position: Int, `object`: Any) {
-        container.removeView( `object` as View)
-    }
-
-    override fun instantiateItem(container: ViewGroup, position: Int): Any {
-        val view = LayoutInflater.from(context).inflate(R.layout.item_banner, container, false)
-        val imageView = view.findViewById(R.id.item_img) as ImageView
-
-        val index = position % data.size
+    override fun convert(helper: BaseViewHolder, item: BannerResponse) {
         Glide
-            .with(context)
-            .load(data[index].imagePath)
-            .into(imageView)
-        //OnClick
-        imageView.setOnClickListener{
-            LogUtils.i(data[position].url)
-        }
-
-        container.addView(view)
-        return view
+            .with(mContext)
+            .load(item.imagePath)
+            .into(helper.getView<ImageView>(R.id.item_img).apply{
+                setOnItemChildClickListener { adapter, view, position ->
+                    LogUtils.i(data[position].url)
+                }
+            })
     }
 }
