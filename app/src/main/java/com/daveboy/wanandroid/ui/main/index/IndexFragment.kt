@@ -1,13 +1,11 @@
 package com.daveboy.wanandroid.ui.main.index
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.daveboy.base.BaseVMFragment
-import com.daveboy.base.core.ViewState
 import com.daveboy.base.util.parseState
 import com.daveboy.common.util.startActivityExt
 import com.daveboy.wanandroid.R
@@ -23,7 +21,6 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
     private lateinit var articleAdapter:IndexAdapter
     private lateinit var bannerAdapter: BannerAdapter
     private lateinit var banner_vp:ViewPager
-    private var count= 0
     override fun getLayoutId(): Int {
         return R.layout.fragment_index
     }
@@ -71,36 +68,31 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
     override fun startObserve() {
         viewModel.apply {
             requestState.observe(this@IndexFragment, Observer {
+                smart_ly.finish()
                 parseState(it,{
-                    smart_ly.finish()
-
-                })
-
-
-                smart_ly.setEnableLoadMore(it.over.not())
-                if(page.value==1){
-                    articleAdapter.setNewData(it.datas)
-                    //文章列表后请求回来top被重置的问题
-                    val top = topArticleList.value
-                    if(top.isNullOrEmpty().not()){
-                        articleAdapter.addData(0,top!!.map {
-                            it.toArticle()
-                        })
+                    if(viewModel.page==1){
+                        articleAdapter.setNewData(it.datas)
+                    }else{
+                        articleAdapter.addData(it.datas)
                     }
-                }else{
-                    articleAdapter.addData(it.datas)
-                }
+                })
             })
             topArticleList.observe(this@IndexFragment, Observer {
-                articleAdapter.addData(0,it.map {
-                    it.toArticle()
+                //TODO 这里可能会导致bug
+                parseState(it,{
+                    articleAdapter.addData(0,it.map {
+                        it.toArticle()
+                    })
                 })
+
             })
             bannerList.observe(this@IndexFragment, Observer {
-                count=it.size
-                bannerAdapter.setData(it.toMutableList())
-                bannerAdapter.notifyDataSetChanged()
-                banner_vp.currentItem=1
+                parseState(it,{
+                    bannerAdapter.setData(it.toMutableList())
+                    banner_vp.currentItem=1
+                    bannerAdapter.notifyDataSetChanged()
+                })
+
             })
             currentIndex.observe(this@IndexFragment, Observer {
                 if(it<bannerAdapter.count)
@@ -113,6 +105,7 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
     //==================    ==================
     override fun onPageScrollStateChanged(state: Int) {
         val index = viewModel.currentIndex.value
+        val count=bannerAdapter.count
         when(state){
             0->{//over
                 if ( index== 0) {
@@ -120,7 +113,7 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(),ViewPager.OnPageChangeList
                 } else if (index == count + 1) {
                     banner_vp.setCurrentItem(1, false)
                 }
-                viewModel.liveAutoPlay.value=true
+                viewModel.liveAutoPlay=true
                 viewModel.startPlay()
             }
             1->{//start

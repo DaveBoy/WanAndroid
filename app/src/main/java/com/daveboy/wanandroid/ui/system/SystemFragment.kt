@@ -14,7 +14,6 @@ import kotlinx.android.synthetic.main.fragment_system.*
 
 class SystemFragment :BaseVMFragment<SystemViewModel>(){
 
-    override fun providerVMClass()= SystemViewModel::class.java
     private lateinit var adapter:SystemAdapter
     override fun getLayoutId(): Int {
         return R.layout.fragment_system

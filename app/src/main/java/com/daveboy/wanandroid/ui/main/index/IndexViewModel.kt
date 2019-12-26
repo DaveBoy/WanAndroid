@@ -18,61 +18,27 @@ class IndexViewModel: BaseViewModel() {
     private val repository:IndexRepository by inject()
 
 
-    private var page= 0
-
+    var page= 0
     val requestState=MutableLiveData<ViewState<ArticleResponse>>()
-
-
-
-    val topArticleList =MutableLiveData<List<TopArticleResponse>>()
-    val bannerList =MutableLiveData<List<BannerResponse>>()
+    val topArticleList =MutableLiveData<ViewState<List<TopArticleResponse>>>()
+    val bannerList =MutableLiveData<ViewState<List<BannerResponse>>>()
 
     val currentIndex=MutableLiveData<Int>()
-    val liveAutoPlay=MutableLiveData(false)
-    var job:Job?=null
+
+    var liveAutoPlay=false
+    private var job:Job?=null
     fun getArticleList(refresh:Boolean){
         if(refresh) page=0
         launchRequest({repository.getArticleList(page)},requestState,success = {page++})
     }
     fun getTopArticleList(){
-        viewModelScope.launch {
-            runCatching {
-                repository.getTopArticleList()
-            }.onSuccess {
-                if(it.errorCode!=0){
-                    errorMsg.value=it.errorMsg
-                }else {
-                    LogUtils.i(it.data)
-                    topArticleList.value=it.data
-                }
-            }.onFailure {
-                it.printStackTrace()
-                errorMsg.value="网络请求失败${it.message}"
-            }
-
-        }
+        launchRequest({repository.getTopArticleList()},topArticleList)
     }
     fun getBanner(){
-        viewModelScope.launch {
-            runCatching {
-                repository.getBannerList()
-            }.onSuccess {
-                parse
-                if(it.errorCode!=0){
-                    errorMsg.value=it.errorMsg
-                }else {
-                    LogUtils.i(it.data)
-                    bannerList.value=it.data
-                }
-            }.onFailure {
-                it.printStackTrace()
-                errorMsg.value="网络请求失败${it.message}"
-            }
-
-        }
+        launchRequest({repository.getBannerList()},bannerList)
     }
     fun startPlay(){
-        if(liveAutoPlay.value==true&&job?.isActive!=true) {
+        if(liveAutoPlay&&job?.isActive!=true) {
             job = viewModelScope.launch {
                 repeat(5) {
                     delay(1000)
@@ -83,10 +49,9 @@ class IndexViewModel: BaseViewModel() {
         }
     }
     fun stopPlay(){
-        liveAutoPlay.value=false
+        liveAutoPlay=false
         if(job?.isActive==true){
             job?.cancel()
-
         }
     }
 }
