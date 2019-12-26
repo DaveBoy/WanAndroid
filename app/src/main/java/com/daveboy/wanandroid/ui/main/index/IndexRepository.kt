@@ -11,7 +11,7 @@ class IndexRepository {
     suspend fun getArticleList(page:Int): BaseResponse<ArticleResponse> {
         return RetrofitManager.service.getArticleList(page)
     }
-    suspend fun getTopArticleList(): BaseResponse<List<TopArticleResponse>> {
+    suspend fun getTopArticleList(): BaseResponse<List<Article>> {
         return RetrofitManager.service.getTopArticleList()
     }
     suspend fun getBannerList(): BaseResponse<List<BannerResponse>> {

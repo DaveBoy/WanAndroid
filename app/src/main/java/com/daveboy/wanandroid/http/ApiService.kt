@@ -12,7 +12,7 @@ interface ApiService {
     @GET(Urls.ARTICLE_LIST)
     suspend fun getArticleList(@Path("page")page:Int): BaseResponse<ArticleResponse>
     @GET(Urls.TOP_ARTICLE_LIST)
-    suspend fun getTopArticleList(): BaseResponse<List<TopArticleResponse>>
+    suspend fun getTopArticleList(): BaseResponse<List<Article>>
 
     @GET(Urls.BANNER_LIST)
     suspend fun getBannerList(): BaseResponse<List<BannerResponse>>

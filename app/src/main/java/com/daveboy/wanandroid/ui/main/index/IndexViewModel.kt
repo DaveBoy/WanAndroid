@@ -6,6 +6,7 @@ import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
 import com.daveboy.base.core.ViewState
 import com.daveboy.base.util.launchRequest
+import com.daveboy.wanandroid.entity.Article
 import com.daveboy.wanandroid.entity.ArticleResponse
 import com.daveboy.wanandroid.entity.BannerResponse
 import com.daveboy.wanandroid.entity.TopArticleResponse
@@ -20,7 +21,7 @@ class IndexViewModel: BaseViewModel() {
 
     var page= 0
     val requestState=MutableLiveData<ViewState<ArticleResponse>>()
-    val topArticleList =MutableLiveData<ViewState<List<TopArticleResponse>>>()
+    val topArticleList =MutableLiveData<ViewState<List<Article>>>()
     val bannerList =MutableLiveData<ViewState<List<BannerResponse>>>()
 
     val currentIndex=MutableLiveData<Int>()
