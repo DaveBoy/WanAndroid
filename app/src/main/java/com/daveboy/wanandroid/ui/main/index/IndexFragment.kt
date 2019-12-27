@@ -106,9 +106,7 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
             topArticleList.observe(this@IndexFragment, Observer {
                 //TODO 这里可能会导致bug
                 parseState(it,{
-                    articleAdapter.addData(0,it.map {
-                        it.toArticle()
-                    })
+                    articleAdapter.addData(0,it)
                 })
 
             })

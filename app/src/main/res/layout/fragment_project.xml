@@ -14,7 +14,7 @@
             app:tabMode="scrollable"
             android:layout_height="wrap_content"/>
 
-    <androidx.viewpager.widget.ViewPager
+    <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/project_vp"
             android:layout_width="match_parent"
             app:layout_constraintTop_toBottomOf="@id/project_tab"
