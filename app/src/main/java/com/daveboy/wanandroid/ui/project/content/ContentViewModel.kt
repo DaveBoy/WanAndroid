@@ -4,34 +4,21 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
+import com.daveboy.base.core.ViewState
+import com.daveboy.base.util.launchRequest
 import com.daveboy.wanandroid.entity.*
 import kotlinx.coroutines.launch
+import org.koin.core.inject
 
 class ContentViewModel: BaseViewModel() {
-    val tabProjectResponse =MutableLiveData<TabProjectResponse>()
-    private val repository= ContentRepository()
-    val errorMsg=MutableLiveData<String>()
-    val page= MutableLiveData(1)
-    val cid= MutableLiveData<Int>()
+    val tabProjectResponse =MutableLiveData<ViewState<TabProjectResponse>>()
+    private val repository: ContentRepository by inject()
+    var page= 1 //项目列表数据从1开始
 
-    fun getTabProjectResponse(){
-        viewModelScope.launch {
-            runCatching {
-                repository.getTabProject(page.value?:1,cid.value!!)
-            }.onSuccess {
-                if(it.errorCode!=0){
-                    errorMsg.value=it.errorMsg
-                }else {
-                    LogUtils.i(it.data)
-                    page.value=(page.value?:1)+1
-                    tabProjectResponse.value=it.data
-                    //repository.insertTab(it.data)
-                }
-            }.onFailure {
-                it.printStackTrace()
-                errorMsg.value="网络请求失败${it.message}"
-            }
+    var cid: Int? = null
 
-        }
+    fun getTabProjectResponse(refresh:Boolean){
+        if(refresh) page=1
+        launchRequest({repository.getTabProject(page,cid!!)},tabProjectResponse,success = {page++})
     }
 }

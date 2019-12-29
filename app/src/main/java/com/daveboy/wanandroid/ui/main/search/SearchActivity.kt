@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_search.*
 
 
 class SearchActivity:BaseVMActivity<SearchViewModel>() {
-    private var searchFragment:SearchFragment?=null
+    private val searchFragment:SearchFragment by lazy { SearchFragment() }
 
 
     override fun startObserve() {
@@ -29,11 +29,9 @@ class SearchActivity:BaseVMActivity<SearchViewModel>() {
     }
 
     override fun initView() {
-        searchFragment=findFragment(SearchFragment::class.java)
-        if(searchFragment==null) {
-            searchFragment=SearchFragment()
-            loadRootFragment(R.id.search_ly,searchFragment!!)
-        }
+        supportFragmentManager.beginTransaction().apply {
+            this.replace(R.id.search_ly,searchFragment)
+        }.commitAllowingStateLoss()
     }
 
     override fun initListener() {

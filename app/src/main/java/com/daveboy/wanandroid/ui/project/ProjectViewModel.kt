@@ -4,30 +4,18 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
+import com.daveboy.base.core.ViewState
+import com.daveboy.base.util.launchRequest
 import com.daveboy.wanandroid.entity.ProjectTab
+import com.daveboy.wanandroid.ui.main.index.IndexRepository
 import kotlinx.coroutines.launch
+import org.koin.core.inject
 
 class ProjectViewModel: BaseViewModel() {
-    val tabList =MutableLiveData<List<ProjectTab>>()
-    private val repository= ProjectRepository()
-    val errorMsg=MutableLiveData<String>()
+    val tabList =MutableLiveData<ViewState<List<ProjectTab>>>()
+    private val repository: ProjectRepository by inject()
 
     fun getTabList(){
-        viewModelScope.launch {
-            runCatching {
-                repository.getTabList()
-            }.onSuccess {
-                if(it.errorCode!=0){
-                    errorMsg.value=it.errorMsg
-                }else {
-                    LogUtils.i(it.data)
-                    tabList.value=it.data
-                }
-            }.onFailure {
-                it.printStackTrace()
-                errorMsg.value="网络请求失败${it.message}"
-            }
-
-        }
+        launchRequest({repository.getTabList()},tabList)
     }
 }
