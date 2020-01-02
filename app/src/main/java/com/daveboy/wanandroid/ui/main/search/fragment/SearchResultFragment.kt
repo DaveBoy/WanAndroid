@@ -1,51 +1,43 @@
 package com.daveboy.wanandroid.ui.main.search.fragment
 
-import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.daveboy.base.BaseVMFragment
+import com.daveboy.base.util.parseState
+import com.daveboy.common.util.gone
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.IndexAdapter
-import com.daveboy.wanandroid.ui.main.index.IndexViewModel
-import com.daveboy.wanandroid.ui.main.search.HotKeyAdapter
-import com.daveboy.wanandroid.ui.main.search.SiteAdapter
-import com.google.android.flexbox.JustifyContent
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.daveboy.wanandroid.ui.main.search.SearchViewModel
+import com.daveboy.wanandroid.ui.main.search.SearchKeyViewModel
+import com.daveboy.wanandroid.util.finish
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_index.*
-import kotlinx.android.synthetic.main.fragment_search.*
 
 
-class SearchResultFragment:BaseVMFragment<SearchViewModel>() {
-    private lateinit var adapter: IndexAdapter
-    private lateinit var searchViewModel:SearchResultViewModel
-    override fun providerVMClass(): Class<SearchViewModel>? {
-        return SearchViewModel::class.java
-    }
+class SearchResultFragment:BaseVMFragment<SearchResultViewModel>() {
+    private val adapter by lazy { IndexAdapter() }
+    private val searchViewModel by lazy { ViewModelProviders.of(activity!!).get(SearchKeyViewModel::class.java) }
 
     override fun startObserve() {
-        viewModel.apply {
+        searchViewModel.apply {
             keyWord.observe(this@SearchResultFragment, Observer {
-                searchViewModel.page.value=0
                 initArticleData()
             })
         }
-        searchViewModel.apply {
-            articleList.observe(this@SearchResultFragment, Observer {
-                smart_ly.finishRefresh()
-                smart_ly.finishLoadMore()
+        viewModel.articleList.observe(this@SearchResultFragment, Observer {
+            smart_ly.finish()
+            parseState(it,{
                 smart_ly.setEnableLoadMore(it.over.not())
-                if(page.value==1){
+                if(viewModel.page==1){
                     adapter.setNewData(it.datas)
                 }else{
                     adapter.addData(it.datas)
                 }
             })
-        }
+
+        })
+
     }
 
     override fun getLayoutId(): Int {
@@ -53,10 +45,7 @@ class SearchResultFragment:BaseVMFragment<SearchViewModel>() {
     }
 
     override fun initView() {
-        title_group.visibility= View.GONE
-        if(::adapter.isInitialized.not()){
-            adapter= IndexAdapter()
-        }
+        title_group.gone()
         index_rv.layoutManager= LinearLayoutManager(activity)
         adapter.onAttachedToRecyclerView(index_rv)
         index_rv.adapter=adapter
@@ -65,32 +54,18 @@ class SearchResultFragment:BaseVMFragment<SearchViewModel>() {
     override fun initListener() {
         smart_ly.setOnRefreshLoadMoreListener(object: OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {
-                initArticleData()
+                initArticleData(false)
             }
 
             override fun onRefresh(refreshLayout: RefreshLayout) {
-                searchViewModel.page.value=0
                 initArticleData()
             }
         })
     }
-    private fun initArticleData(){
-        searchViewModel.searchArticleList(viewModel.keyWord.value?:"")
+    private fun initArticleData(refresh:Boolean=true){
+        viewModel.searchArticleList(searchViewModel.keyWord.value?:"",refresh)
     }
     override fun initData() {
     }
 
-    override fun onBackPressedSupport(): Boolean {
-        pop()
-        return true
-    }
-    /**
-     * 重写  进行数据共享
-     */
-    override fun initVM() {
-        providerVMClass()?.let {
-            viewModel = ViewModelProviders.of(activity!!).get(it)
-        }
-        searchViewModel=ViewModelProviders.of(this).get(SearchResultViewModel::class.java)
-    }
 }

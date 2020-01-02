@@ -1,7 +1,11 @@
 package com.daveboy.wanandroid.ui.main
 
 import android.view.MenuItem
+import androidx.core.view.children
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentPagerAdapter
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
@@ -29,6 +33,17 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
     override fun getLayoutId()= R.layout.activity_main
     override fun initView() {
+        main_vp2.adapter=object :FragmentStateAdapter(supportFragmentManager,lifecycle){
+            override fun getItemCount(): Int {
+                return fragments.size
+            }
+
+            override fun createFragment(position: Int): Fragment {
+                return fragments[position]
+            }
+
+        }
+        main_vp2.isUserInputEnabled=false
         nav_view.setOnNavigationItemSelectedListener(this)
     }
 

@@ -6,11 +6,14 @@ import com.daveboy.wanandroid.ui.login.LoginRepository
 import com.daveboy.wanandroid.ui.login.LoginViewModel
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
 import com.daveboy.wanandroid.ui.main.index.IndexRepository
+import com.daveboy.wanandroid.ui.main.search.fragment.SearchRepository
+import com.daveboy.wanandroid.ui.main.search.fragment.SearchResultRepository
 import com.daveboy.wanandroid.ui.project.ProjectFragment
 import com.daveboy.wanandroid.ui.project.ProjectRepository
 import com.daveboy.wanandroid.ui.project.content.ContentRepository
 import com.daveboy.wanandroid.ui.system.SystemFragment
 import com.daveboy.wanandroid.ui.system.SystemRepository
+import com.daveboy.wanandroid.ui.system.content.SystemContentRepository
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.bind
@@ -25,6 +28,9 @@ val repositorys= module{
     single { ProjectRepository() }
     single { ContentRepository() }
     single { SystemRepository() }
+    single { SearchResultRepository() }
+    single { SearchRepository() }
+    single { SystemContentRepository() }
 }
 val netModules= module {
     single { RetrofitManager.service }

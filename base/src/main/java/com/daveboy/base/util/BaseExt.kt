@@ -2,10 +2,7 @@ package com.daveboy.base.util
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.daveboy.base.BaseResponse
-import com.daveboy.base.BaseVMActivity
-import com.daveboy.base.BaseVMFragment
-import com.daveboy.base.BaseViewModel
+import com.daveboy.base.*
 import com.daveboy.base.core.RequestException
 import com.daveboy.base.core.ViewState
 import kotlinx.coroutines.launch
@@ -30,7 +27,7 @@ fun <VM> getVmClazz(obj: Any): VM {
  * @param onError 失败回调
  *
  */
-fun <T> BaseVMActivity<*>.parseState(
+fun <T> BaseActivity.parseState(
     viewState: ViewState<T>,
     onSuccess: (T) -> Unit,
     onError: ((RequestException) -> Unit)? = null,
@@ -58,7 +55,20 @@ fun <T> BaseVMFragment<*>.parseState(
     onError: ((RequestException) -> Unit)? = null,
     onLoading: (() -> Unit)? = null
 ) {
-    (activity as? BaseVMActivity<*>)?.parseState(viewState, onSuccess, onError, onLoading)
+    when (viewState) {
+        is ViewState.Loading -> {
+            showProgress()
+            onLoading?.run { this }
+        }
+        is ViewState.Success -> {
+            dismissProgress()
+            onSuccess(viewState.data)
+        }
+        is ViewState.Error -> {
+            dismissProgress()
+            onError?.run { this(viewState.exception) }
+        }
+    }
 }
 
 /**

@@ -1,4 +1,4 @@
-package com.daveboy.wanandroid.ui.main.search
+package com.daveboy.wanandroid.ui.main.search.fragment
 
 import com.daveboy.wanandroid.entity.*
 import com.daveboy.wanandroid.http.RetrofitManager

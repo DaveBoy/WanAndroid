@@ -25,6 +25,11 @@ abstract class BaseFragment: Fragment() {
     abstract fun initListener()
     abstract fun initData()
 
+    fun showProgress(){
 
+    }
+    fun dismissProgress(){
+
+    }
 
 }

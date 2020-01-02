@@ -18,6 +18,7 @@ class SystemAdapter:BaseQuickAdapter<SystemModel,BaseViewHolder>(R.layout.item_s
     override fun convert(helper: BaseViewHolder, item: SystemModel) {
         helper.setText(R.id.system_title,item.name)
         val container=helper.getView<FlexboxLayout>(R.id.system_des)
+        container.removeAllViews()
         item.children.forEachIndexed { index, systemTopic ->
             val textView = TextView(mContext).apply {
                 text = systemTopic.name

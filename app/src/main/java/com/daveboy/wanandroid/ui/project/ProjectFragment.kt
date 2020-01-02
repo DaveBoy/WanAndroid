@@ -25,7 +25,7 @@ class ProjectFragment :BaseVMFragment<ProjectViewModel>(){
                             }
                         }
                     }
-                    titleList=it.map { it.name }
+                    titleList=it.map { it.name.replace("&amp;","&") }
 
                     projectAdapter.notifyDataSetChanged()
                 })

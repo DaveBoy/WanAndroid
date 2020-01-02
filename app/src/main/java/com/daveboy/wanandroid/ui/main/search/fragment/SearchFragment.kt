@@ -4,31 +4,31 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.blankj.utilcode.util.KeyboardUtils
 import com.daveboy.base.BaseVMFragment
+import com.daveboy.base.util.parseState
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.entity.SearchKeyHot
 import com.daveboy.wanandroid.ui.main.search.HotKeyAdapter
+import com.daveboy.wanandroid.ui.main.search.SearchKeyViewModel
 import com.daveboy.wanandroid.ui.main.search.SiteAdapter
 import com.google.android.flexbox.JustifyContent
 import com.google.android.flexbox.FlexDirection
 import com.google.android.flexbox.FlexboxLayoutManager
-import com.daveboy.wanandroid.ui.main.search.SearchViewModel
 import kotlinx.android.synthetic.main.fragment_search.*
 
 
 class SearchFragment:BaseVMFragment<SearchViewModel>() {
-    lateinit var hotKeyAdapter: HotKeyAdapter
-    lateinit var siteAdapter: SiteAdapter
-    override fun providerVMClass(): Class<SearchViewModel>? {
-        return SearchViewModel::class.java
-    }
+    private val hotKeyAdapter by lazy { HotKeyAdapter() }
+    private val siteAdapter by lazy { SiteAdapter() }
+    private val searchViewModel by lazy { ViewModelProviders.of(activity!!).get(SearchKeyViewModel::class.java) }
 
     override fun startObserve() {
         viewModel.apply {
             hotKeyList.observe(this@SearchFragment, Observer {
-                hotKeyAdapter.setNewData(it)
+                parseState(it,{hotKeyAdapter.setNewData(it)})
+
             })
             siteList.observe(this@SearchFragment, Observer {
-                siteAdapter.setNewData(it)
+                parseState(it,{siteAdapter.setNewData(it)})
             })
         }
     }
@@ -38,13 +38,11 @@ class SearchFragment:BaseVMFragment<SearchViewModel>() {
     }
 
     override fun initView() {
-        hotKeyAdapter= HotKeyAdapter()
         hotKeyAdapter.setOnItemClickListener { adapter, view, position ->
-            start(SearchResultFragment())
-            viewModel.keyWord.value=(adapter.data[position] as SearchKeyHot).name
+            searchViewModel.keyWord.value=(adapter.data[position] as SearchKeyHot).name
+            searchViewModel.showDetailPage.value=true
             KeyboardUtils.hideSoftInput(activity)
         }
-        siteAdapter= SiteAdapter()
         siteAdapter.setOnItemClickListener { adapter, view, position ->
 
         }
@@ -70,12 +68,5 @@ class SearchFragment:BaseVMFragment<SearchViewModel>() {
         viewModel.getSiteList()
     }
 
-    /**
-     * 重写  进行数据共享
-     */
-    override fun initVM() {
-        providerVMClass()?.let {
-            viewModel = ViewModelProviders.of(activity!!).get(it)
-        }
-    }
+
 }

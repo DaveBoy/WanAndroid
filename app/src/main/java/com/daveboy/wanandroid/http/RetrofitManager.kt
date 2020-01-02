@@ -25,9 +25,9 @@ object RetrofitManager {
        return OkHttpClient.Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level=HttpLoggingInterceptor.Level.BODY
+
             })
              .addInterceptor {
-                 LogUtils.i("请求地址：${it.request().url()}")
                 val requestUrl=it.request().url().toString()
                  if(!requestUrl.contains(Urls.LOGIN)){
                     it.proceed(it.request().newBuilder().addHeader("Cookie", getString(SP_COOKIE)?:"").build())

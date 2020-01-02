@@ -72,7 +72,7 @@
             app:layout_constraintStart_toEndOf="@id/project_time"
             app:layout_constraintTop_toTopOf="@id/project_time"
             app:layout_constraintBottom_toBottomOf="@id/project_time"
-            android:layout_marginStart="@dimen/dp_20"
+            android:layout_marginStart="@dimen/dp_10"
             android:textSize="@dimen/text_mini_12"
             tools:text="作者"
             />
@@ -80,7 +80,7 @@
             android:id="@+id/project_like"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:layout_marginEnd="@dimen/dp_40"
+            android:layout_marginEnd="@dimen/dp_20"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/project_author"
             app:layout_constraintBottom_toBottomOf="@id/project_author"
