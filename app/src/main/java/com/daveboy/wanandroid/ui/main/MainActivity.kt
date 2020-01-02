@@ -1,16 +1,13 @@
 package com.daveboy.wanandroid.ui.main
 
 import android.view.MenuItem
-import androidx.core.view.children
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentPagerAdapter
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
 import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
 import com.daveboy.wanandroid.ui.project.ProjectFragment
-import com.daveboy.wanandroid.ui.system.SystemFragment
+import com.daveboy.wanandroid.ui.system.SystemWrapperFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.ext.android.get
@@ -21,7 +18,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
     init {
         val index=get<IndexFragment>()
         val project=get<ProjectFragment>()
-        val system=get<SystemFragment>()
+        val system=get<SystemWrapperFragment>()
         fragments= listOf(index,project,system)
     }
 

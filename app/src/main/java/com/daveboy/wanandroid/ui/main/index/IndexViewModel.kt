@@ -2,14 +2,12 @@ package com.daveboy.wanandroid.ui.main.index
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.blankj.utilcode.util.LogUtils
 import com.daveboy.base.BaseViewModel
 import com.daveboy.base.core.ViewState
 import com.daveboy.base.util.launchRequest
 import com.daveboy.wanandroid.entity.Article
 import com.daveboy.wanandroid.entity.ArticleResponse
 import com.daveboy.wanandroid.entity.BannerResponse
-import com.daveboy.wanandroid.entity.TopArticleResponse
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

@@ -7,7 +7,7 @@ import com.daveboy.base.BaseVMFragment
 import com.daveboy.base.util.parseState
 import com.daveboy.common.util.gone
 import com.daveboy.wanandroid.R
-import com.daveboy.wanandroid.ui.main.index.IndexAdapter
+import com.daveboy.wanandroid.ui.main.index.ArticleAdapter
 import com.daveboy.wanandroid.ui.main.search.SearchKeyViewModel
 import com.daveboy.wanandroid.util.finish
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_index.*
 
 
 class SearchResultFragment:BaseVMFragment<SearchResultViewModel>() {
-    private val adapter by lazy { IndexAdapter() }
+    private val adapter by lazy { ArticleAdapter() }
     private val searchViewModel by lazy { ViewModelProviders.of(activity!!).get(SearchKeyViewModel::class.java) }
 
     override fun startObserve() {

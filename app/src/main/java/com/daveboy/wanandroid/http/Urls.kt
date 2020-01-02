@@ -44,5 +44,9 @@ object Urls {
      * 体系列表
      */
     const val SYSTEM_LIST = "tree/json"
+    /**
+     * 导航列表
+     */
+    const val NAVI_LIST = "navi/json"
 
 }

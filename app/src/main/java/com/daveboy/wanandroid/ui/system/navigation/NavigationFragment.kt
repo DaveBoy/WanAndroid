@@ -1,4 +1,4 @@
-package com.daveboy.wanandroid.ui.system
+package com.daveboy.wanandroid.ui.system.navigation
 
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -7,9 +7,9 @@ import com.daveboy.base.util.parseState
 import com.daveboy.wanandroid.R
 import kotlinx.android.synthetic.main.fragment_system.*
 
-class SystemFragment :BaseVMFragment<SystemViewModel>(){
+class NavigationFragment :BaseVMFragment<NavigationViewModel>(){
 
-    private val adapter: SystemAdapter by lazy { SystemAdapter() }
+    private val adapter: NavigationAdapter by lazy { NavigationAdapter() }
     override fun getLayoutId(): Int {
         return R.layout.fragment_system
     }
@@ -32,12 +32,11 @@ class SystemFragment :BaseVMFragment<SystemViewModel>(){
     }
     override fun startObserve() {
         viewModel.apply {
-            systemList.observe(this@SystemFragment, Observer {
+            navigationList.observe(this@NavigationFragment, Observer {
                 smart_ly.finishRefresh()
                 parseState(it,{adapter.setNewData(it) })
             })
         }
-        
     }
 
 

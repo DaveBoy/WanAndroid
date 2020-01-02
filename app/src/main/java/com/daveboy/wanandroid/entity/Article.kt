@@ -25,10 +25,14 @@ open class Article(
     val id: Int,
     val link: String,
     val niceDate: String,
+    val niceShareDate: String,
     val origin: String,
     val prefix: String,
     val projectLink: String,
     val publishTime: Long,
+    val selfVisible:Int,
+    val shareDate: Long,
+    val shareUser:String,
     val superChapterId: Int,
     val superChapterName: String,
     val tags: List<Tag>,
@@ -37,7 +41,7 @@ open class Article(
     val userId: Int,
     val visible: Int,
     val zan: Int,
-    val top: Boolean = false
+    val top: Boolean=false//是否是置顶
 )
 
 data class Tag(

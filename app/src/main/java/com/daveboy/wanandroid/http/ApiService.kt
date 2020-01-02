@@ -33,6 +33,8 @@ interface ApiService {
 
     @GET(Urls.SYSTEM_LIST)
     suspend fun getSystemList(): BaseResponse<List<SystemModel>>
+    @GET(Urls.NAVI_LIST)
+    suspend fun getNavigationList(): BaseResponse<List<NavigationModel>>
 
     @GET(Urls.ARTICLE_LIST)
     suspend fun getSystemArticleList(@Path("page")page:Int,@Query("cid")cid:Int): BaseResponse<ArticleResponse>

@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_index.*
 
 class IndexFragment :BaseVMFragment<IndexViewModel>(){
 
-    private  val articleAdapter:IndexAdapter by lazy { IndexAdapter() }
+    private  val articleAdapter:ArticleAdapter by lazy { ArticleAdapter() }
     private  val bannerAdapter: BannerAdapter by lazy { BannerAdapter() }
     private lateinit var banner_vp:ViewPager2
     override fun getLayoutId(): Int {

@@ -1,6 +1,5 @@
 package com.daveboy.wanandroid.di
 
-import com.daveboy.wanandroid.http.ApiService
 import com.daveboy.wanandroid.http.RetrofitManager
 import com.daveboy.wanandroid.ui.login.LoginRepository
 import com.daveboy.wanandroid.ui.login.LoginViewModel
@@ -11,12 +10,12 @@ import com.daveboy.wanandroid.ui.main.search.fragment.SearchResultRepository
 import com.daveboy.wanandroid.ui.project.ProjectFragment
 import com.daveboy.wanandroid.ui.project.ProjectRepository
 import com.daveboy.wanandroid.ui.project.content.ContentRepository
-import com.daveboy.wanandroid.ui.system.SystemFragment
 import com.daveboy.wanandroid.ui.system.SystemRepository
+import com.daveboy.wanandroid.ui.system.SystemWrapperFragment
 import com.daveboy.wanandroid.ui.system.content.SystemContentRepository
+import com.daveboy.wanandroid.ui.system.navigation.NavigationRepository
 import org.koin.androidx.fragment.dsl.fragment
 import org.koin.androidx.viewmodel.dsl.viewModel
-import org.koin.dsl.bind
 import org.koin.dsl.module
 
 val fragmentModule= module {
@@ -28,6 +27,7 @@ val repositorys= module{
     single { ProjectRepository() }
     single { ContentRepository() }
     single { SystemRepository() }
+    single { NavigationRepository() }
     single { SearchResultRepository() }
     single { SearchRepository() }
     single { SystemContentRepository() }
@@ -38,6 +38,6 @@ val netModules= module {
 val fragments= module {
     fragment { IndexFragment() }
     fragment { ProjectFragment() }
-    fragment { SystemFragment() }
+    fragment { SystemWrapperFragment() }
 }
 val diModules= listOf(fragmentModule,repositorys,fragments)

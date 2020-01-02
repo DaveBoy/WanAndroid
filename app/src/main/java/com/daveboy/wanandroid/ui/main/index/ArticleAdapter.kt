@@ -6,10 +6,10 @@ import com.chad.library.adapter.base.BaseViewHolder
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.entity.Article
 
-class IndexAdapter : BaseQuickAdapter<Article, BaseViewHolder>(R.layout.item_article) {
+class ArticleAdapter : BaseQuickAdapter<Article, BaseViewHolder>(R.layout.item_article) {
 
     override fun convert(helper: BaseViewHolder, item: Article) {
-        helper.setText(R.id.item_author, item.author)
+        helper.setText(R.id.item_author, item.author+item.shareUser)
             .setText(R.id.item_tag, item.superChapterName.plus("/").plus(item.chapterName))
             .setText(R.id.item_title,
                 if(item.title.contains("<em class='highlight'>"))
