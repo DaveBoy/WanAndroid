@@ -15,7 +15,8 @@
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup">
         <activity
-                android:name=".ui.login.LoginActivity">
+                android:name=".ui.login.LoginActivity"
+                android:launchMode="singleTask">
         </activity>
         <activity
                 android:name=".ui.main.search.SearchActivity"/>

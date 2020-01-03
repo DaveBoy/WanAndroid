@@ -2,7 +2,7 @@ package com.daveboy.wanandroid.ui.system
 
 import com.daveboy.wanandroid.entity.SystemModel
 import com.daveboy.wanandroid.http.RetrofitManager
-import com.daveboy.base.BaseResponse
+import com.daveboy.wanandroid.http.BaseResponse
 
 class SystemRepository {
 

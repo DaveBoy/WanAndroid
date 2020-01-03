@@ -22,7 +22,7 @@ class IndexViewModel: BaseViewModel() {
     val topArticleList =MutableLiveData<ViewState<List<Article>>>()
     val bannerList =MutableLiveData<ViewState<List<BannerResponse>>>()
 
-    val currentIndex=MutableLiveData<Int>()
+    val currentIndex=MutableLiveData(0)
 
     var liveAutoPlay=false
     private var job:Job?=null

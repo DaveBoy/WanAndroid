@@ -1,6 +1,5 @@
 package com.daveboy.wanandroid.http
 
-import com.daveboy.base.BaseResponse
 import com.daveboy.wanandroid.entity.*
 import retrofit2.http.*
 
@@ -38,4 +37,7 @@ interface ApiService {
 
     @GET(Urls.ARTICLE_LIST)
     suspend fun getSystemArticleList(@Path("page")page:Int,@Query("cid")cid:Int): BaseResponse<ArticleResponse>
+
+    @GET(Urls.SCORE)
+    suspend fun getScore(): BaseResponse<Score>
 }

@@ -9,9 +9,11 @@ import com.daveboy.base.BaseVMFragment
 import com.daveboy.base.util.parseState
 import com.daveboy.common.util.startActivityExt
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.constant.LOGIN_STATE
 import com.daveboy.wanandroid.ui.main.index.viewPaper.BannerAdapter
 import com.daveboy.wanandroid.ui.main.search.SearchActivity
 import com.daveboy.wanandroid.util.finish
+import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
 import kotlinx.android.synthetic.main.fragment_index.*
@@ -123,7 +125,10 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
                     banner_vp.currentItem=it
             })
         }
-        
+        LiveEventBus.get(LOGIN_STATE,Boolean::class.java).observe(this, Observer {
+            getArticle(refresh = true)
+            viewModel.getTopArticleList()
+        })
     }
 
     //==================    ==================

@@ -1,10 +1,12 @@
 package com.daveboy.base.util
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.daveboy.base.*
 import com.daveboy.base.core.RequestException
 import com.daveboy.base.core.ViewState
+import com.daveboy.common.util.toast
 import kotlinx.coroutines.launch
 import java.lang.reflect.ParameterizedType
 import java.net.ConnectException
@@ -75,6 +77,7 @@ fun <T> BaseVMFragment<*>.parseState(
  *我想了一东的时间，错误提示需要改一下
  */
 fun Throwable?.parseErrorString(): String {
+    Log.i("parseErrorString",this?.message?:"")
     return when (this) {
         is ConnectException -> "网络错误"
         is UnknownHostException -> "无网络连接"
@@ -86,9 +89,12 @@ fun Throwable?.parseErrorString(): String {
  *
  * @param result 请求结果
  */
-fun <T> MutableLiveData<ViewState<T>>.paresResult(result: BaseResponse<T>) {
-    value = if (result.isSuccess()) ViewState.onSuccess(result.data) else
+fun <T> MutableLiveData<ViewState<T>>.paresResult(result: IResponse<T>) {
+    value = if (result.isSuccess()) ViewState.onSuccess(result.getRealData()) else {
+        Log.i("launchRequest",result.toString())
+        if(result.atErrorCode()) return
         ViewState.onError(RequestException(result.getErrorInfo()))
+    }
 }
 
 /**
@@ -104,10 +110,10 @@ fun <T> MutableLiveData<ViewState<T>>.paresException(e: Throwable) {
  * @param showLoading 配置是否显示等待框
  */
 fun <T> BaseViewModel.launchRequest(
-    request: suspend () -> BaseResponse<T>,
+    request: suspend () -> IResponse<T>,
     viewState: MutableLiveData<ViewState<T>>,
     showLoading: Boolean = true,
-    success:(BaseResponse<T>)->Unit={},
+    success:(IResponse<T>)->Unit={},
     error:(Throwable)->Unit={}
 ) {
     viewModelScope.launch {
@@ -118,6 +124,7 @@ fun <T> BaseViewModel.launchRequest(
             success.invoke(it)
             viewState.paresResult(it)
         }.onFailure {
+            Log.i("launchRequest",it.message?:"")
             error.invoke(it)
             viewState.paresException(it)
         }

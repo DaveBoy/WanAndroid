@@ -2,7 +2,7 @@ package com.daveboy.wanandroid.ui.main.index
 
 import com.daveboy.wanandroid.entity.*
 import com.daveboy.wanandroid.http.RetrofitManager
-import com.daveboy.base.BaseResponse
+import com.daveboy.wanandroid.http.BaseResponse
 
 
 class IndexRepository {

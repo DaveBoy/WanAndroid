@@ -49,4 +49,9 @@ object Urls {
      */
     const val NAVI_LIST = "navi/json"
 
+    /**
+     * 个人积分
+     */
+    const val SCORE = "lg/coin/userinfo/json"
+
 }

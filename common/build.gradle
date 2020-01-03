@@ -67,5 +67,7 @@ dependencies {
     api Ext.koinViewModel
     api Ext.koinExt
     api Ext.koinFragment
+
+    api Ext.liveBusExt
 }
 

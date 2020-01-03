@@ -32,6 +32,7 @@ object Version {
     const val flexboxVersion="1.1.0"
     const val koin_version="2.1.0-alpha-8"
     const val viewPaper2Version="1.0.0"
+    const val liveBus_version="1.5.7"
 
 }
 
@@ -81,4 +82,7 @@ object Ext {
     const val koinViewModel= "org.koin:koin-androidx-viewmodel:${Version.koin_version}"
     const val koinFragment= "org.koin:koin-androidx-fragment:${Version.koin_version}"
     const val koinExt= "org.koin:koin-androidx-ext:${Version.koin_version}"
+
+    const val liveBusExt= "com.jeremyliao:live-event-bus-x:${Version.liveBus_version}"
+
 }

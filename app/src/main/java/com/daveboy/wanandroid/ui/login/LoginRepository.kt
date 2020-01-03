@@ -2,7 +2,7 @@ package com.daveboy.wanandroid.ui.login
 
 import com.daveboy.wanandroid.entity.UserModel
 import com.daveboy.wanandroid.http.RetrofitManager
-import com.daveboy.base.BaseResponse
+import com.daveboy.wanandroid.http.BaseResponse
 import com.daveboy.base.IRepository
 import com.daveboy.wanandroid.http.ApiService
 import org.koin.core.KoinComponent

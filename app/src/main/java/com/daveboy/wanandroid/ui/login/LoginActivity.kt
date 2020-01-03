@@ -9,7 +9,9 @@ import com.daveboy.common.util.startActivityExt
 import com.daveboy.common.util.textStr
 import com.daveboy.common.util.toast
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.constant.LOGIN_STATE
 import com.daveboy.wanandroid.ui.main.MainActivity
+import com.jeremyliao.liveeventbus.LiveEventBus
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseVMActivity<LoginViewModel>() {
@@ -18,6 +20,7 @@ class LoginActivity : BaseVMActivity<LoginViewModel>() {
         viewModel.apply {
             requestState.observe(this@LoginActivity, Observer {
                 parseState(it,{
+                    LiveEventBus.get(LOGIN_STATE).post(true)
                     startActivityExt<MainActivity>()
                     finish()
                 },{

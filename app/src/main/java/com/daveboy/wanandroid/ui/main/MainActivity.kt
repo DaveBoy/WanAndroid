@@ -6,6 +6,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.daveboy.base.BaseActivity
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
+import com.daveboy.wanandroid.ui.mine.MineFragment
 import com.daveboy.wanandroid.ui.project.ProjectFragment
 import com.daveboy.wanandroid.ui.system.SystemWrapperFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -19,7 +20,8 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
         val index=get<IndexFragment>()
         val project=get<ProjectFragment>()
         val system=get<SystemWrapperFragment>()
-        fragments= listOf(index,project,system)
+        val mine=get<MineFragment>()
+        fragments= listOf(index,project,system,mine)
     }
 
 

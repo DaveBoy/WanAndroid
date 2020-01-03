@@ -1,5 +1,6 @@
 package com.daveboy.wanandroid.http
 
+import android.util.Log
 import com.blankj.utilcode.util.LogUtils
 import com.daveboy.common.SP_COOKIE
 import com.daveboy.common.util.getString
@@ -23,9 +24,10 @@ object RetrofitManager {
 
    private fun getOkHttpClient():OkHttpClient{
        return OkHttpClient.Builder()
-            .addInterceptor(HttpLoggingInterceptor().apply {
+            .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+                Log.i("RetrofitLog",it)
+            }).apply {
                 level=HttpLoggingInterceptor.Level.BODY
-
             })
              .addInterceptor {
                 val requestUrl=it.request().url().toString()
