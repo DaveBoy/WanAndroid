@@ -53,5 +53,12 @@ object Urls {
      * 个人积分
      */
     const val SCORE = "lg/coin/userinfo/json"
-
+    /**
+     * 收藏
+     */
+    const val COLLECT = "lg/collect/{id}/json"
+    /**
+     * 取消收藏
+     */
+    const val UNCOLLECT = "lg/uncollect_originId/{id}/json"
 }

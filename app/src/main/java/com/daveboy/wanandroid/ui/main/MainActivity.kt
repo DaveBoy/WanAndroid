@@ -43,6 +43,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
 
         }
         main_vp2.isUserInputEnabled=false
+        main_vp2.offscreenPageLimit=3
         nav_view.setOnNavigationItemSelectedListener(this)
     }
 

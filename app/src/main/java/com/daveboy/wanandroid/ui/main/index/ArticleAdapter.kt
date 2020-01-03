@@ -25,5 +25,6 @@ class ArticleAdapter : BaseQuickAdapter<Article, BaseViewHolder>(R.layout.item_a
                 R.id.item_like,
                 if (item.collect) R.mipmap.timeline_like_pressed else R.mipmap.timeline_like_normal
             )
+            .addOnClickListener(R.id.item_like)
     }
 }

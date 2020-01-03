@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.base.util.parseState
 import com.daveboy.wanandroid.R
+import com.daveboy.wanandroid.entity.Article
 import com.daveboy.wanandroid.util.finish
 import com.scwang.smartrefresh.layout.api.RefreshLayout
 import com.scwang.smartrefresh.layout.listener.OnRefreshLoadMoreListener
@@ -41,7 +42,20 @@ class ProjectContentFragment  : BaseVMFragment<ContentViewModel>(){
 
         tab_project_rv.layoutManager= LinearLayoutManager(activity)
         adapter.onAttachedToRecyclerView(tab_project_rv)
-        tab_project_rv.adapter=adapter
+        tab_project_rv.adapter=adapter.apply {
+            this.setOnItemChildClickListener { adapter, view, position ->
+                when(view.id){
+                    R.id.project_like->{
+                        (adapter.data[position] as Article).let {
+                            if(it.collect) viewModel.unCollect(it.id) else viewModel.collect(it.id)
+                            it.collect=!it.collect
+                        }
+
+                        adapter.notifyDataSetChanged()
+                    }
+                }
+            }
+        }
 
         smart_ly.setOnRefreshLoadMoreListener(object: OnRefreshLoadMoreListener {
             override fun onLoadMore(refreshLayout: RefreshLayout) {

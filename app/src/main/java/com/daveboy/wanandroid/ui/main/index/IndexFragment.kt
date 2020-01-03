@@ -10,8 +10,10 @@ import com.daveboy.base.util.parseState
 import com.daveboy.common.util.startActivityExt
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.constant.LOGIN_STATE
+import com.daveboy.wanandroid.entity.Article
 import com.daveboy.wanandroid.ui.main.index.viewPaper.BannerAdapter
 import com.daveboy.wanandroid.ui.main.search.SearchActivity
+import com.daveboy.wanandroid.util.closeChangeAnimation
 import com.daveboy.wanandroid.util.finish
 import com.jeremyliao.liveeventbus.LiveEventBus
 import com.scwang.smartrefresh.layout.api.RefreshLayout
@@ -29,9 +31,23 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
 
     override fun initView() {
         index_rv.apply {
+
             articleAdapter.onAttachedToRecyclerView(this)
             layoutManager=LinearLayoutManager(activity)
-            adapter=articleAdapter
+            adapter=articleAdapter.apply {
+                this.setOnItemChildClickListener { adapter, view, position ->
+                    when(view.id){
+                        R.id.item_like->{
+                            (adapter.data[position] as Article).let {
+                                if(it.collect) viewModel.unCollect(it.id) else viewModel.collect(it.id)
+                                it.collect=!it.collect
+                            }
+
+                            adapter.notifyDataSetChanged()
+                        }
+                    }
+                }
+            }
         }
         val header: View = LayoutInflater.from(context).inflate(R.layout.layout_banner, index_rv, false)
 
@@ -68,6 +84,8 @@ class IndexFragment :BaseVMFragment<IndexViewModel>(){
             }
         })
         articleAdapter.addHeaderView(header)
+        index_rv.closeChangeAnimation()
+
     }
 
     override fun initListener() {

@@ -1,6 +1,7 @@
 package com.daveboy.wanandroid.di
 
 import com.daveboy.wanandroid.http.RetrofitManager
+import com.daveboy.wanandroid.http.repository.CollectRepository
 import com.daveboy.wanandroid.ui.login.LoginRepository
 import com.daveboy.wanandroid.ui.login.LoginViewModel
 import com.daveboy.wanandroid.ui.main.index.IndexFragment
@@ -34,6 +35,7 @@ val repositorys= module{
     single { SearchRepository() }
     single { SystemContentRepository() }
     single { MineRepository() }
+    single { CollectRepository() }
 }
 val netModules= module {
     single { RetrofitManager.service }

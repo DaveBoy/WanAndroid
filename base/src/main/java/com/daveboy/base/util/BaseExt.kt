@@ -130,3 +130,14 @@ fun <T> BaseViewModel.launchRequest(
         }
     }
 }
+fun <T> BaseViewModel.launchRequest(
+    request: suspend () -> IResponse<T>
+) {
+    viewModelScope.launch {
+        runCatching {
+            request()
+        }.onFailure {
+            Log.i("launchRequest",it.message?:"")
+        }
+    }
+}

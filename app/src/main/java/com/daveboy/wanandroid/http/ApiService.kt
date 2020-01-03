@@ -40,4 +40,10 @@ interface ApiService {
 
     @GET(Urls.SCORE)
     suspend fun getScore(): BaseResponse<Score>
+
+    @POST(Urls.COLLECT)
+    suspend fun collect(@Path("id")id:Int): BaseResponse<String?>
+
+    @POST(Urls.UNCOLLECT)
+    suspend fun unCollect(@Path("id")id:Int): BaseResponse<String?>
 }
