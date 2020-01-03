@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.daveboy.base.BaseVMFragment
 import com.daveboy.base.util.parseState
+import com.daveboy.common.util.fromHtml
 import com.daveboy.wanandroid.R
 import com.daveboy.wanandroid.ui.project.content.ProjectContentFragment
 import com.google.android.material.tabs.TabLayout
@@ -25,7 +26,7 @@ class ProjectFragment :BaseVMFragment<ProjectViewModel>(){
                             }
                         }
                     }
-                    titleList=it.map { it.name.replace("&amp;","&") }
+                    titleList=it.map { it.name.fromHtml().toString() }
 
                     projectAdapter.notifyDataSetChanged()
                 })
