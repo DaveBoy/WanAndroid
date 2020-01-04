@@ -10,6 +10,7 @@ import com.daveboy.wanandroid.ui.main.search.fragment.SearchRepository
 import com.daveboy.wanandroid.ui.main.search.fragment.SearchResultRepository
 import com.daveboy.wanandroid.ui.mine.MineFragment
 import com.daveboy.wanandroid.ui.mine.MineRepository
+import com.daveboy.wanandroid.ui.mine.collect.CollectArticleRepository
 import com.daveboy.wanandroid.ui.project.ProjectFragment
 import com.daveboy.wanandroid.ui.project.ProjectRepository
 import com.daveboy.wanandroid.ui.project.content.ContentRepository
@@ -36,6 +37,7 @@ val repositorys= module{
     single { SystemContentRepository() }
     single { MineRepository() }
     single { CollectRepository() }
+    single { CollectArticleRepository() }
 }
 val netModules= module {
     single { RetrofitManager.service }

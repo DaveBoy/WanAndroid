@@ -13,6 +13,7 @@ import com.daveboy.wanandroid.constant.LOGIN_STATE
 import com.daveboy.wanandroid.constant.TOKEN_KEY
 import com.daveboy.wanandroid.constant.USERNAME_KEY
 import com.daveboy.wanandroid.ui.login.LoginActivity
+import com.daveboy.wanandroid.ui.mine.collect.CollectActivity
 import com.jeremyliao.liveeventbus.LiveEventBus
 import kotlinx.android.synthetic.main.fragment_mine.*
 
@@ -31,6 +32,10 @@ class MineFragment:BaseVMFragment<MineViewModel>(){
     override fun initListener() {
         tv_name.setOnClickListener {
             if(token.isNullOrEmpty()) startActivityExt<LoginActivity>()
+        }
+        tv_collect.setOnClickListener {
+            if(token.isNullOrEmpty()) startActivityExt<LoginActivity>()
+            else startActivityExt<CollectActivity>()
         }
     }
 

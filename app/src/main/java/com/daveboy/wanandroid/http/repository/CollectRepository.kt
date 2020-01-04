@@ -13,4 +13,7 @@ class CollectRepository:IRepository {
     suspend fun unCollect(id:Int): BaseResponse<String?> {
         return service.unCollect(id)
     }
+    suspend fun unCollectInCollect(id:Int,originId:Int): BaseResponse<String?> {
+        return service.unCollectInCollect(id,originId)
+    }
 }

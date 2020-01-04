@@ -61,4 +61,12 @@ object Urls {
      * 取消收藏
      */
     const val UNCOLLECT = "lg/uncollect_originId/{id}/json"
+    /**
+     * 取消收藏 收藏列表中
+     */
+    const val UNCOLLECT_INCOLLECT = "lg/uncollect/{id}/json"
+    /**
+     * 收藏文章列表
+     */
+    const val COLLECT_ARTICLE_LIST = "lg/collect/list/{page}/json"
 }

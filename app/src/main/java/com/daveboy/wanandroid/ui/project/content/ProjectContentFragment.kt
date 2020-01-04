@@ -76,6 +76,5 @@ class ProjectContentFragment  : BaseVMFragment<ContentViewModel>(){
     }
     private fun loadData(refresh:Boolean){
         viewModel.getTabProjectResponse(refresh)
-
     }
 }

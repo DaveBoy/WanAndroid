@@ -46,4 +46,11 @@ interface ApiService {
 
     @POST(Urls.UNCOLLECT)
     suspend fun unCollect(@Path("id")id:Int): BaseResponse<String?>
+
+    @FormUrlEncoded
+    @POST(Urls.UNCOLLECT_INCOLLECT)
+    suspend fun unCollectInCollect(@Path("id")id:Int,@Field("originId")originId:Int): BaseResponse<String?>
+
+    @GET(Urls.COLLECT_ARTICLE_LIST)
+    suspend fun getCollectArticle(@Path("page")page:Int): BaseResponse<CollectListResponse>
 }

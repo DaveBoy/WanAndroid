@@ -89,4 +89,12 @@
             android:text=""
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/tv_score_title" />
+    <TextView
+            android:id="@+id/tv_collect"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:paddingStart="5dp"
+            android:text="我的收藏"
+            app:layout_constraintTop_toBottomOf="@id/tv_score_title" />
 </androidx.constraintlayout.widget.ConstraintLayout>

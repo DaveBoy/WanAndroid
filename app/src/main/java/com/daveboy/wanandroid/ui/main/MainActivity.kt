@@ -58,7 +58,7 @@ class MainActivity : BaseActivity(), BottomNavigationView.OnNavigationItemSelect
             R.id.navigation_home -> updateCurrentVp(0)
             R.id.navigation_project ->updateCurrentVp(1)
             R.id.navigation_system -> updateCurrentVp(2)
-            R.id.navigation_notifications -> updateCurrentVp(3)
+            R.id.title_mine -> updateCurrentVp(3)
         }
         return true
     }
