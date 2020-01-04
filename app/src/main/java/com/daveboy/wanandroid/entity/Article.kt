@@ -11,7 +11,7 @@ data class ArticleResponse(
     val total: Int
 )
 
-open class Article(
+data class Article(
 
     val apkLink: String,
     val author: String,

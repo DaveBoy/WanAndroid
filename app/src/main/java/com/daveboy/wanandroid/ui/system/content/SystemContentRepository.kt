@@ -1,16 +1,15 @@
 package com.daveboy.wanandroid.ui.system.content
 
-import com.daveboy.wanandroid.entity.*
-import com.daveboy.wanandroid.http.RetrofitManager
+import com.daveboy.base.IRepository
+import com.daveboy.wanandroid.entity.ArticleResponse
+import com.daveboy.wanandroid.http.ApiService
 import com.daveboy.wanandroid.http.BaseResponse
+import org.koin.core.inject
 
-class SystemContentRepository {
+class SystemContentRepository:IRepository {
+    val service by inject<ApiService>()
 
-
-    suspend fun getSystemArticleList(page:Int,cid:Int): BaseResponse<ArticleResponse> {
-        return RetrofitManager.service.getSystemArticleList(page,cid)
+    suspend fun getSystemArticleList(cid:Int, page:Int): BaseResponse<ArticleResponse> {
+        return service.getSystemArticleList(page,cid)
     }
-
-
-
 }

@@ -23,6 +23,8 @@
         <activity
                 android:name=".ui.mine.collect.CollectActivity"/>
         <activity
+                android:name=".ui.system.content.SystemContentWrapperActivity"/>
+        <activity
                 android:name=".ui.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
